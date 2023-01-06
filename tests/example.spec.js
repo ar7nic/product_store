@@ -1,19 +1,57 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
+const userName = "ar7nic";
+const userPassword = "storePassword";
+const randomString = (Math.random() + 1).toString(36).slice(-6);
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+test.beforeEach(async ({ page }) => {
+    await page.goto('https://www.demoblaze.com/index.html');
 });
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test.describe('sign in tests', ()=>{
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects the URL to contain intro.
-  await expect(page).toHaveURL(/.*intro/);
+    test('sign in with existing user', async({page})=>{
+        await page.locator("//a[@id='signin2']").click();
+        await page.locator("//input[@id='sign-username']").fill(userName);
+        await page.locator("//input[@id='sign-password']").fill(userPassword);
+        await page.locator("//button[contains(text(),'Sign up')]").click();
+        page.on('dialog',async (dialog)=>{
+            expect(dialog.message().includes('This user already exist.'));
+            await dialog.accept();
+        })
+    })
 });
+
+test.describe('login tests', ()=>{
+
+    test('login with wrong user name', async ({page})=>{
+        await page.locator("//a[@id='login2']").click();
+        await page.locator("//input[@id='loginusername']").fill(randomString);
+        await page.locator("//input[@id='loginpassword']").fill(userPassword);
+        await page.locator("//button[contains(text(),'Log in')]").click();
+        page.on('dialog',async (dialog)=>{
+            expect(dialog.message().includes('User does not exist.'));
+            await dialog.accept();
+            })
+        })
+    test('login with wrong password', async ({page})=>{
+        await page.locator("//a[@id='login2']").click();
+        await page.locator("//input[@id='loginusername']").fill(userName);
+        await page.locator("//input[@id='loginpassword']").fill(randomString);
+        await page.locator("//button[contains(text(),'Log in')]").click();
+        page.on('dialog',async (dialog)=>{
+            expect(dialog.message().includes('Wrong password.'));
+            await dialog.accept();
+            })
+        })
+
+    test('login into account', async ({page})=>{
+        await page.locator("//a[@id='login2']").click();
+        await page.locator("//input[@id='loginusername']").fill(userName);
+        await page.locator("//input[@id='loginpassword']").fill(userPassword);
+        await page.locator("//button[contains(text(),'Log in')]").click();
+        await expect(page.locator("//a[@id='nameofuser']")).toContainText('Welcome')
+    })
+
+});
+
