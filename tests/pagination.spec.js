@@ -5,31 +5,29 @@ test.beforeEach(async ({ page }) => {
     await page.goto(URLS.siteUrl);
 });
 
-//  //ul[@class='pagination']//button[@id='next2']
-
-// //ul[@class='pagination']//button[@id='prev2']
-
-// //h4[@class='card-title']/a
-
 test.describe('pagination tests', ()=>{
     test('elements on the second page are different',async ({page})=>{
 
-       const elementOnFirst = await page.locator("(//h4[@class='card-title']/a)[1]").textContent();
+       await  page.waitForLoadState('networkidle');
+       const elementsOnFirst = await page.locator("//h4[@class='card-title']/a").allTextContents();
        await page.locator("//ul[@class='pagination']//button[@id='next2']").click();
-       await page.waitForTimeout(2000);
-       const elementOnSecond = await page.locator("(//h4[@class='card-title']/a)[1]").textContent();
-       await expect(elementOnSecond).not.toEqual(elementOnFirst);
+       await page.waitForTimeout(1000);
+       const elementsOnSecond = await page.locator("//h4[@class='card-title']/a").allTextContents();
+       console.log("first-page: " +elementsOnFirst);
+        console.log("second page " + elementsOnSecond);
+       await expect(elementsOnSecond).not.toEqual(elementsOnFirst);
 
     })
     test('elements on the first page are the same after paging',async ({page})=>{
-        const elementOnFirst = await page.locator("(//h4[@class='card-title']/a)[1]").textContent();
+        await  page.waitForLoadState('networkidle');
+        const elementsOnFirst = await page.locator("//h4[@class='card-title']/a").allTextContents();
         await page.locator("//ul[@class='pagination']//button[@id='next2']").click();
         await page.waitForTimeout(1000);
-        const elementOnSecond = await page.locator("(//h4[@class='card-title']/a)[1]").textContent();
+        const elementsOnSecond = await page.locator("//h4[@class='card-title']/a").allTextContents();
         await page.locator("//ul[@class='pagination']//button[@id='prev2']").click();
         await page.waitForTimeout(1000);
-        const elementOnPrev = await page.locator("(//h4[@class='card-title']/a)[1]").textContent();
-        await expect(elementOnSecond).not.toEqual(elementOnFirst);
-        await expect(elementOnPrev).toEqual(elementOnFirst);
+        const elementsOnPrev = await page.locator("//h4[@class='card-title']/a").allTextContents();
+        await expect(elementsOnSecond).not.toEqual(elementsOnFirst);
+        await expect(elementsOnPrev).toEqual(elementsOnFirst);
     })
 })

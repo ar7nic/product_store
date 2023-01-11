@@ -1,4 +1,3 @@
-import {MyUtils} from "../utils/myUtils";
 import {URLS} from "../const/baseConst";
 const {test, expect} = require("@playwright/test");
 

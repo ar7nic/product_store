@@ -36,7 +36,7 @@ test.describe('login tests', ()=>{
         await page.locator("//input[@id='loginusername']").fill(USERS.testUser.userName);
         await page.locator("//input[@id='loginpassword']").fill(USERS.testUser.userPassword);
         await page.locator("//button[contains(text(),'Log in')]").click();
-        await page.waitForTimeout(1000);
+        await  page.waitForLoadState('networkidle');
         await expect(page.locator("//a[@id='nameofuser']")).toContainText('Welcome');
         await expect(page.locator("//a[@id='nameofuser']")).toContainText(USERS.testUser.userName);
     })
