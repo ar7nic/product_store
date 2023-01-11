@@ -13,6 +13,7 @@ test.describe('about-us tests', ()=>{
     test('about-us pop-up is closable',async ({page})=>{
         await page.locator("//a[contains(text(),'About us')]").click();
         await page.locator("//div[@id='videoModal']//div[@class='modal-footer']/button").click();
+        await page.waitForTimeout(1000);
         await expect(page.locator("//div[@id='videoModal']")).toHaveAttribute("style", "display: none;", {timeout: 3000});
     })
 })

@@ -21,7 +21,7 @@ test.describe('pagination tests', ()=>{
        await expect(elementOnSecond).not.toEqual(elementOnFirst);
 
     })
-    test('elements on the first page the same after wowing pages',async ({page})=>{
+    test('elements on the first page are the same after paging',async ({page})=>{
         const elementOnFirst = await page.locator("(//h4[@class='card-title']/a)[1]").textContent();
         await page.locator("//ul[@class='pagination']//button[@id='next2']").click();
         await page.waitForTimeout(1000);
