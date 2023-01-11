@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('category menu tests', ()=>{
-    test.only('items filtered by categorie Laptops', async ({page})=>{
+    test('items filtered by categorie Laptops', async ({page})=>{
         await page.locator("//div[@class='list-group']/a[contains(text(),'Laptops')]").click();
         await expect(page.locator("(//div[@class='card-block']//p[@id='article'])[1]")).toContainText("laptop");
     })
