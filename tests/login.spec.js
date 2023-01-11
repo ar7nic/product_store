@@ -1,11 +1,11 @@
-import {USERS} from "../const/baseConst";
+import {URLS, USERS} from "../const/baseConst";
 import {MyUtils} from "../utils/myUtils";
 
 const {test, expect} = require("@playwright/test");
 
 
 test.beforeEach(async ({ page }) => {
-    await page.goto(MyUtils.siteUrl);
+    await page.goto(URLS.siteUrl);
 });
 
 test.describe('login tests', ()=>{
