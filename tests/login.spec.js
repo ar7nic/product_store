@@ -38,8 +38,9 @@ test.describe('login tests', ()=>{
         await page.locator(PAGES.loginPage.loginPasswordInput).fill(USERS.testUser.userPassword);
         await page.locator(PAGES.loginPage.loginButton).click();
         await page.waitForLoadState('networkidle');
-        await expect(page.locator(PAGES.loginPage.welcomeMenu)).toContainText('Welcome');
-        await expect(page.locator(PAGES.loginPage.welcomeMenu)).toContainText(USERS.testUser.userName);
+        const welcomeText = await page.locator(PAGES.loginPage.welcomeMenu).textContent();
+        await expect(welcomeText.includes('Welcome')).toBeTruthy;
+        await expect(welcomeText.includes(USERS.testUser.userName)).toBeTruthy;
     })
 
 });
