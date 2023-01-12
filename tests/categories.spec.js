@@ -1,4 +1,5 @@
 import {URLS} from "../const/baseConst";
+import {PAGES} from "../pages/pages";
 const {test, expect} = require("@playwright/test");
 
 
@@ -7,8 +8,8 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('category menu tests', ()=>{
-    test('items filtered by categorie Laptops', async ({page})=>{
-        await page.locator("//div[@class='list-group']/a[contains(text(),'Laptops')]").click();
-        await expect(page.locator("(//div[@class='card-block']//p[@id='article'])[1]")).toContainText("laptop");
+    test('items filtered by category Laptops', async ({page})=>{
+        await page.locator(PAGES.categoriesPage.laptopMenu).click();
+        await expect(page.locator(PAGES.categoriesPage.firstElementLaptopCategory)).toContainText("laptop");
     })
 })

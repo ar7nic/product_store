@@ -1,4 +1,5 @@
 import {URLS, USERS} from "../const/baseConst";
+import {PAGES} from "../pages/pages";
 
 const { test, expect } = require('@playwright/test');
 test.beforeEach(async ({ page }) => {
@@ -8,10 +9,10 @@ test.beforeEach(async ({ page }) => {
 test.describe('sign in tests', ()=>{
 
     test('sign in with existing user', async({page})=>{
-        await page.locator("//a[@id='signin2']").click();
-        await page.locator("//input[@id='sign-username']").fill(USERS.testUser.userName);
-        await page.locator("//input[@id='sign-password']").fill(USERS.testUser.userPassword);
-        await page.locator("//button[contains(text(),'Sign up')]").click();
+        await page.locator(PAGES.signInPage.signInMenu).click();
+        await page.locator(PAGES.signInPage.signInUserNameInput).fill(USERS.testUser.userName);
+        await page.locator(PAGES.signInPage.signInPasswordInput).fill(USERS.testUser.userPassword);
+        await page.locator(PAGES.signInPage.signUpButton).click();
         page.on('dialog',async (dialog)=>{
             expect(dialog.message().includes('This user already exist.'));
             await dialog.accept();

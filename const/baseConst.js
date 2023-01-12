@@ -8,3 +8,4 @@ export const URLS = {
 export const USERS = {
     testUser : new User("ar7nic","storePassword"),
 }
+
