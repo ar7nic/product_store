@@ -1,4 +1,6 @@
 export class CategoriesPage {
     laptopMenu = "//div[@class='list-group']/a[contains(text(),'Laptops')]";
-    firstElementLaptopCategory = "(//div[@class='card-block']//p[@id='article'])[1]";
+    itemsTitles = "//div[@class='card-block']/h4[@class='card-title']";
+    itemsPrices = "//div[@class='card-block']/h5";
+    itemsDescriptions = "//div[@class='card-block']//p[@id='article']";
 }
