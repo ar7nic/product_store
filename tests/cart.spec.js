@@ -17,9 +17,6 @@ test.describe('cart-tests', ()=>{
             expect(dialog.message().includes('Product added'));
             await dialog.accept();
         })
-        // Promise.all(
-        //     []
-        // )
         await page.locator(PAGES.cartPage.cartMenu).click();
         const itemTitle = await page.locator(PAGES.cartPage.itemTitle).textContent();
         await expect(prodName.includes(itemTitle)).toBeTruthy();
@@ -34,6 +31,7 @@ test.describe('cart-tests', ()=>{
             await dialog.accept();
         })
         await page.locator(PAGES.cartPage.cartMenu).click();
+        await page.waitForLoadState('networkidle');
         await page.waitForTimeout(2000);
         await page.locator(PAGES.cartPage.deleteItemBtn).click();
         await page.waitForLoadState('networkidle');
