@@ -5,6 +5,7 @@ import {PaginationPage} from "./paginationPage";
 import {SignInPage} from "./signInPage";
 import {ContactPage} from "./contactPage";
 import {CartPage} from "./cartPage";
+import {ProductPage} from "./productPage";
 
 export class Pages {
     aboutPage = new AboutPage();
@@ -14,6 +15,8 @@ export class Pages {
     signInPage = new SignInPage();
     contactPage = new ContactPage();
     cartPage = new CartPage();
+    productPage = new ProductPage();
+
 }
 
 export const PAGES = new Pages();
