@@ -6,8 +6,9 @@ import {SignInPage} from "./signInPage";
 import {ContactPage} from "./contactPage";
 import {CartPage} from "./cartPage";
 import {ProductPage} from "./productPage";
+import {OrderPopup} from "./orderPopup";
 
-export class Pages {
+class Pages {
     aboutPage = new AboutPage();
     categoriesPage = new CategoriesPage();
     loginPage = new LoginPage();
@@ -16,7 +17,7 @@ export class Pages {
     contactPage = new ContactPage();
     cartPage = new CartPage();
     productPage = new ProductPage();
-
+    orderPopup = new OrderPopup();
 }
 
 export const PAGES = new Pages();
