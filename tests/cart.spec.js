@@ -20,6 +20,7 @@ test.describe('cart-tests', ()=>{
         await page.locator(PAGES.cartPage.cartMenu).click();
         await page.locator(PAGES.cartPage.tableWithItems).waitFor();
         await page.waitForTimeout(1000);
+
         const itemTitle = await page.locator(PAGES.cartPage.itemTitle).textContent();
         await expect(prodName.includes(itemTitle)).toBeTruthy();
 
@@ -35,6 +36,7 @@ test.describe('cart-tests', ()=>{
         await page.locator(PAGES.cartPage.cartMenu).click();
         await page.locator(PAGES.cartPage.tableWithItems).waitFor();
         await page.waitForTimeout(1000);
+
         await page.locator(PAGES.cartPage.deleteItemBtn).click();
         await page.waitForLoadState('networkidle');
         await expect(page.locator(PAGES.cartPage.itemsTable)).toBeEmpty();

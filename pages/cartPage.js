@@ -4,4 +4,5 @@ export class CartPage {
     deleteItemBtn = "//tbody[@id='tbodyid']//a[contains(@onclick,'deleteItem')]";
     itemsTable = "//tbody[@id='tbodyid']";
     tableWithItems = "//tr[@class='success']";
+
 }
