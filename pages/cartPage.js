@@ -10,4 +10,5 @@ export class CartPage {
     totalPrice = "//h3[@id='totalp']";
     placeOrderBtn = "//button[@data-target='#orderModal']";
 
+
 }

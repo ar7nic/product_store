@@ -18,6 +18,7 @@ test.describe('cart-tests', ()=>{
 
         await page.locator(PAGES.cartPage.cartMenu).click();
         await page.locator(PAGES.cartPage.cartItems).waitFor();
+
         await page.waitForTimeout(1000);
 
         const itemTitle = await page.locator(PAGES.cartPage.itemTitle).textContent();
@@ -45,7 +46,6 @@ test.describe('cart-tests', ()=>{
                 break;
             }
         }
-
 
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(2000);

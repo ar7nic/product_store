@@ -20,9 +20,11 @@ test.describe('login tests', ()=>{
             await dialog.accept();
         })
     })
+
     test('login with wrong password', async ({page})=>{
 
         await Assistants.loginAssistant.loginToSite(page,USERS.testUser.userName,MyUtils.randomString());
+
         page.on('dialog',async (dialog)=>{
             expect(dialog.message() === 'Wrong password.');
                 //.includes('Wrong password.'));
