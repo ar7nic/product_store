@@ -1,6 +1,7 @@
 import {URLS, USERS} from "../const/baseConst";
 import {MyUtils} from "../utils/myUtils";
 import {PAGES} from "../pages/pages";
+import {Assistants} from "../assistants/assistants";
 
 const {test, expect} = require("@playwright/test");
 
@@ -12,20 +13,18 @@ test.beforeEach(async ({ page }) => {
 test.describe('login tests', ()=>{
 
     test('login with wrong user name', async ({page})=>{
-        await page.locator(PAGES.loginPage.loginMenu).click();
-        await page.locator(PAGES.loginPage.loginUserNameInput).fill(MyUtils.randomString());
-        await page.locator(PAGES.loginPage.loginPasswordInput).fill(USERS.testUser.userPassword);
-        await page.locator(PAGES.loginPage.loginButton).click();
+
+        await Assistants.loginAssistant.loginToSite(page,MyUtils.randomString(),USERS.testUser.userPassword);
         page.on('dialog',async (dialog)=>{
             expect(dialog.message().includes('User does not exist.'));
             await dialog.accept();
         })
     })
-    test.only('login with wrong password', async ({page})=>{
-        await page.locator(PAGES.loginPage.loginMenu).click();
-        await page.locator(PAGES.loginPage.loginUserNameInput).fill(USERS.testUser.userName);
-        await page.locator(PAGES.loginPage.loginPasswordInput).fill(MyUtils.randomString());
-        await page.locator(PAGES.loginPage.loginButton).click();
+
+    test('login with wrong password', async ({page})=>{
+
+        await Assistants.loginAssistant.loginToSite(page,USERS.testUser.userName,MyUtils.randomString());
+
         page.on('dialog',async (dialog)=>{
             expect(dialog.message() === 'Wrong password.');
                 //.includes('Wrong password.'));
@@ -33,15 +32,14 @@ test.describe('login tests', ()=>{
         })
     })
 
-    test('can successfully login into account', async ({page})=>{
-        await page.locator(PAGES.loginPage.loginMenu).click();
-        await page.locator(PAGES.loginPage.loginUserNameInput).fill(USERS.testUser.userName);
-        await page.locator(PAGES.loginPage.loginPasswordInput).fill(USERS.testUser.userPassword);
-        await page.locator(PAGES.loginPage.loginButton).click();
+    test.only('can successfully login into account', async ({page})=>{
+        await Assistants.loginAssistant.loginToSite(page,USERS.testUser.userName,USERS.testUser.userPassword);
         await page.waitForLoadState('networkidle');
+        await page.waitForTimeout(1000);
         const welcomeText = await page.locator(PAGES.loginPage.welcomeMenu).textContent();
-        await expect(welcomeText.includes('Welcome')).toBeTruthy;
-        await expect(welcomeText.includes(USERS.testUser.userName)).toBeTruthy;
+        await expect(welcomeText).toEqual('Welcome '+ USERS.testUser.userName);
+        // await expect(welcomeText.includes('Welcome')).toBeTruthy;
+        // await expect(welcomeText.includes(USERS.testUser.userName)).toBeTruthy;
     })
 
 });
