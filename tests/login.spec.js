@@ -21,13 +21,14 @@ test.describe('login tests', ()=>{
             await dialog.accept();
         })
     })
-    test('login with wrong password', async ({page})=>{
+    test.only('login with wrong password', async ({page})=>{
         await page.locator(PAGES.loginPage.loginMenu).click();
         await page.locator(PAGES.loginPage.loginUserNameInput).fill(USERS.testUser.userName);
         await page.locator(PAGES.loginPage.loginPasswordInput).fill(MyUtils.randomString());
         await page.locator(PAGES.loginPage.loginButton).click();
         page.on('dialog',async (dialog)=>{
-            expect(dialog.message().includes('Wrong password.'));
+            expect(dialog.message() === 'Wrong password.');
+                //.includes('Wrong password.'));
             await dialog.accept();
         })
     })
