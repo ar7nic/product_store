@@ -15,10 +15,7 @@ test.describe('cart-tests', ()=>{
         const prodPrice = (await page.locator(PAGES.productPage.prodPrice).textContent()).split("*")[0];
         await page.locator(PAGES.productPage.addToCartBtn).click();
         await Assistants.cartAssistant.popUpAccept(page,'Product added');
-        // page.on('dialog',async (dialog)=>{
-        //     expect(dialog.message().includes('Product added'));
-        //     await dialog.accept();
-        // })
+
         await page.locator(PAGES.cartPage.cartMenu).click();
         await page.locator(PAGES.cartPage.cartItems).waitFor();
         await page.waitForTimeout(1000);
@@ -48,14 +45,12 @@ test.describe('cart-tests', ()=>{
             }
         }
 
-       // await page.locator(PAGES.cartPage.deleteItemBtn).click();
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(2000);
         const itemsInCartAfterDel = await page.locator(PAGES.cartPage.cartItems);
-
         const delSuccess = parseInt(await page.locator(PAGES.cartPage.totalPrice).textContent()) < totalPrice;
         await expect(delSuccess).toBeTruthy;
-        //await expect(page.locator(PAGES.cartPage.itemsTable)).toBeEmpty();
+
 
     })
 })
