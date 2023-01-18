@@ -6,6 +6,7 @@ export class CartPage {
 
     cartItems = "//tr[@class='success']";
     itemTitlePath = "//td[2]";
+    itemPricePath = "//td[3]";
     itemDelBtnPath = "//td/a";
     totalPrice = "//h3[@id='totalp']";
     placeOrderBtn = "//button[@data-target='#orderModal']";
