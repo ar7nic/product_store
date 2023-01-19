@@ -8,19 +8,20 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('place order tests', ()=>{
-    test('placing order',async ({page})=>{
+    test.only('placing order',async ({page})=>{
         await ASSISTANT.cartAssistant.addToCartFirstItem(page);
         await page.locator(PAGES.cartPage.cartMenu).click();
         await page.locator(PAGES.cartPage.totalPrice).waitFor();
         await page.waitForTimeout(2000);
         await ASSISTANT.orderAssistant.placeTheOrder(page);
         await page.locator(PAGES.orderPopup.confirmBtn).waitFor();
-        await expect(await page.locator(PAGES.orderPopup.thanksMsg).textContent()).toEqual('Thank you for your purchase!');
+        const msg = await page.locator(PAGES.orderPopup.thanksMsg).textContent();
+        await expect(msg).toEqual('Thank you for your purchase!');
         await page.locator(PAGES.orderPopup.confirmBtn).click();
         await page.waitForTimeout(2000);
         await page.waitForLoadState('networkidle');
         await page.locator(PAGES.cartPage.cartMenu).click();
         await page.waitForLoadState('networkidle');
-        await expect(page.locator(PAGES.cartPage.totalPrice)).toBeEmpty();
+        await expect(await page.locator(PAGES.cartPage.totalPrice)).toBeEmpty();
     })
 })

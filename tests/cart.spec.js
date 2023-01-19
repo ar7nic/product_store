@@ -26,10 +26,6 @@ test.describe('cart-tests', ()=>{
 
         const prodForCart = await ASSISTANT.cartAssistant.addToCartFirstItem(page);
         await ASSISTANT.popupAssistant.popUpAccept(page);
-        // page.on('dialog',async (dialog)=>{
-        //     expect(dialog.message()).toEqual('Product added');
-        //     await dialog.accept();
-        // })
         await page.locator(PAGES.cartPage.cartMenu).click();
         await page.waitForTimeout(2000);
         await page.locator(PAGES.cartPage.cartItems).first().waitFor();
@@ -37,7 +33,6 @@ test.describe('cart-tests', ()=>{
         await ASSISTANT.cartAssistant.deleteItemFromCart(page, prodForCart.prodName);
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(2000);
-        const itemsInCartAfterDel = await page.locator(PAGES.cartPage.cartItems);
         const delSuccess = parseInt(await page.locator(PAGES.cartPage.totalPrice).textContent()) < totalPrice;
         await expect(delSuccess).toBeTruthy;
 

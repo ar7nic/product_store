@@ -25,7 +25,7 @@ test.describe('login tests', ()=>{
         // })
     })
 
-    test.only('login with wrong password', async ({page})=>{
+    test('login with wrong password', async ({page})=>{
 
         await ASSISTANT.loginAssistant.loginToSite(page,USERS.testUser.userName,MyUtils.randomString());
 
