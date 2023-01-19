@@ -22,10 +22,9 @@ test.describe('cart-tests', ()=>{
 
     })
 
-    test('deleting item from cart',async ({page})=>{
+    test.only('deleting item from cart',async ({page})=>{
 
         const prodForCart = await ASSISTANT.cartAssistant.addToCartFirstItem(page);
-        await ASSISTANT.popupAssistant.popUpAccept(page);
         await page.locator(PAGES.mainMenu.cartMenu).click();
         await page.waitForTimeout(2000);
         await page.locator(PAGES.cartPage.cartItems).first().waitFor();

@@ -1,15 +1,13 @@
-
 export class PopupAssistant {
-
-       async popUpAccept(page){
-           let text;
-           await page.on('dialog', async (dialog)=>{
-                await dialog.accept();
-                 text = await dialog.message();
-                console.log(text)
-
-        })
-           console.log(text, " -  after page on")
-           return text;
-    }
+  async popUpAccept(page) {
+    let text;
+    const _ = await new Promise(async (resolve) => {
+      await page.on("dialog", async (dialog) => {
+        await dialog.accept();
+        text = dialog.message();
+        resolve();
+      });
+    });
+    return text;
+  }
 }

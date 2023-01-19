@@ -16,27 +16,16 @@ test.describe('login tests', ()=>{
     test('login with wrong user name', async ({page})=>{
 
         await ASSISTANT.loginAssistant.loginToSite(page,MyUtils.randomString(),USERS.testUser.userPassword);
-        await ASSISTANT.popupAssistant.popUpAccept(page);
+        await expect(await ASSISTANT.popupAssistant.popUpAccept(page)).toEqual('User does not exist.');
         //TODO: assert message text from pop-up
 
-        // page.on('dialog',async (dialog)=>{
-        //     expect(dialog.message().includes('User does not exist.'));
-        //     await dialog.accept();
-        // })
     })
 
     test('login with wrong password', async ({page})=>{
 
         await ASSISTANT.loginAssistant.loginToSite(page,USERS.testUser.userName,MyUtils.randomString());
-
         await expect(await ASSISTANT.popupAssistant.popUpAccept(page)).toEqual('Wrong password.');
-        // await ASSISTANT.popupAssistant.popUpAccept(page);
-        //TODO: assert message text from pop-up
 
-        // page.on('dialog',async (dialog)=>{
-        //     expect(dialog.message() === 'Wrong password.');
-        //     await dialog.accept();
-        // })
     })
 
     test('can successfully login into account', async ({page})=>{
