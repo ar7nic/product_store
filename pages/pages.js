@@ -1,23 +1,25 @@
-import {AboutPage} from "./aboutPage";
+import {AboutPopUp} from "./aboutPopUp";
 import {CategoriesPage} from "./categoriesPage";
-import {LoginPage} from "./loginPage";
+import {LoginPopUp} from "./loginPopUp";
 import {PaginationPage} from "./paginationPage";
-import {SignInPage} from "./signInPage";
-import {ContactPage} from "./contactPage";
+import {SignInPopUp} from "./signInPopUp";
+import {ContactPopUp} from "./contactPopUp";
 import {CartPage} from "./cartPage";
 import {ProductPage} from "./productPage";
 import {OrderPopup} from "./orderPopup";
+import {MainMenu} from "./mainMenu";
 
 class Pages {
-    aboutPage = new AboutPage();
+    aboutPage = new AboutPopUp();
     categoriesPage = new CategoriesPage();
-    loginPage = new LoginPage();
+    loginPage = new LoginPopUp();
     paginationPage = new PaginationPage();
-    signInPage = new SignInPage();
-    contactPage = new ContactPage();
+    signInPopUp = new SignInPopUp();
+    contactPage = new ContactPopUp();
     cartPage = new CartPage();
     productPage = new ProductPage();
     orderPopup = new OrderPopup();
+    mainMenu = new MainMenu();
 }
 
 export const PAGES = new Pages();

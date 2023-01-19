@@ -13,7 +13,7 @@ test.describe('cart-tests', ()=>{
 
         const prodForCart = await ASSISTANT.cartAssistant.addToCartFirstItem(page);
         await ASSISTANT.cartAssistant.popUpAccept(page);
-        await page.locator(PAGES.cartPage.cartMenu).click();
+        await page.locator(PAGES.mainMenu.cartMenu).click();
         await page.locator(PAGES.cartPage.cartItems).waitFor();
         await page.waitForTimeout(1000);
         const element = await ASSISTANT.cartAssistant.findItemsInCart(page,prodForCart.prodName);
@@ -26,7 +26,7 @@ test.describe('cart-tests', ()=>{
 
         const prodForCart = await ASSISTANT.cartAssistant.addToCartFirstItem(page);
         await ASSISTANT.popupAssistant.popUpAccept(page);
-        await page.locator(PAGES.cartPage.cartMenu).click();
+        await page.locator(PAGES.mainMenu.cartMenu).click();
         await page.waitForTimeout(2000);
         await page.locator(PAGES.cartPage.cartItems).first().waitFor();
         const totalPrice = parseInt(await page.locator(PAGES.cartPage.totalPrice).textContent());

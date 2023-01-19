@@ -12,7 +12,7 @@ test.describe('sign in tests', ()=>{
 
     test('sign in with existing user', async({page})=>{
 
-        await ASSISTANT.loginAssistant.loginToSite(page,USERS.testUser.userName,USERS.testUser.userPassword);
+        await ASSISTANT.signInAssistant.signInToSite(page,USERS.testUser.userName,USERS.testUser.userPassword);
         await ASSISTANT.popupAssistant.popUpAccept(page);
         //TODO: assert message text from pop-up
 

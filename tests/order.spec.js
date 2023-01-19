@@ -8,9 +8,9 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('place order tests', ()=>{
-    test.only('placing order',async ({page})=>{
+    test('placing order',async ({page})=>{
         await ASSISTANT.cartAssistant.addToCartFirstItem(page);
-        await page.locator(PAGES.cartPage.cartMenu).click();
+        await page.locator(PAGES.mainMenu.cartMenu).click();
         await page.locator(PAGES.cartPage.totalPrice).waitFor();
         await page.waitForTimeout(2000);
         await ASSISTANT.orderAssistant.placeTheOrder(page);
@@ -20,8 +20,17 @@ test.describe('place order tests', ()=>{
         await page.locator(PAGES.orderPopup.confirmBtn).click();
         await page.waitForTimeout(2000);
         await page.waitForLoadState('networkidle');
-        await page.locator(PAGES.cartPage.cartMenu).click();
+        await page.locator(PAGES.mainMenu.cartMenu).click();
         await page.waitForLoadState('networkidle');
         await expect(await page.locator(PAGES.cartPage.totalPrice)).toBeEmpty();
+    })
+
+    test('placing the order without credentials', async ({page})=>{
+        await ASSISTANT.cartAssistant.addToCartFirstItem(page);
+        await page.locator(PAGES.mainMenu.cartMenu).click();
+        await page.locator(PAGES.cartPage.totalPrice).waitFor();
+        await ASSISTANT.orderAssistant.placeTheOrderWithMissingData(page);
+        await ASSISTANT.popupAssistant.popUpAccept(page);
+        await expect(await page.locator(PAGES.orderPopup.name)).toBeVisible();
     })
 })
