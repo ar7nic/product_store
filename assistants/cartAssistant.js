@@ -19,7 +19,7 @@ export class CartAssistant {
     ).split("*")[0];
 
     await page.locator(PAGES.productPage.addToCartBtn).click();
-    await ASSISTANTS.cartAssistant.popUpAccept(page);
+    await this.popUpAccept(page);
     await page.waitForTimeout(1000);
     return { prodName, prodPrice };
   }

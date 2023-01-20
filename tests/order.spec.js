@@ -1,6 +1,7 @@
 import {URLS} from "../const/baseConst";
 import {PAGES} from "../pages/pages";
 import {ASSISTANTS} from "../assistants/assistants";
+import {USERS} from "../models/users";
 
 const { test, expect } = require('@playwright/test');
 test.beforeEach(async ({ page }) => {
@@ -13,7 +14,7 @@ test.describe('place order tests', ()=>{
         await page.locator(PAGES.mainMenu.cartMenu).click();
         await page.locator(PAGES.cartPage.totalPrice).waitFor();
         await page.waitForTimeout(2000);
-        await ASSISTANTS.orderAssistant.placeTheOrder(page);
+        await ASSISTANTS.orderAssistant.placeTheOrder(page,USERS.testUser);
         await page.locator(PAGES.orderPopup.confirmBtn).waitFor();
         const msg = await page.locator(PAGES.orderPopup.thanksMsg).textContent();
         await expect(msg).toEqual('Thank you for your purchase!');
@@ -29,8 +30,8 @@ test.describe('place order tests', ()=>{
         await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
         await page.locator(PAGES.mainMenu.cartMenu).click();
         await page.locator(PAGES.cartPage.totalPrice).waitFor();
-        await ASSISTANTS.orderAssistant.placeTheOrderWithMissingData(page);
-        await ASSISTANTS.popupAssistant.popUpAccept(page);
+        await ASSISTANTS.orderAssistant.placeTheOrderWithMissingData(page,USERS.testUser);
         await expect(await page.locator(PAGES.orderPopup.name)).toBeVisible();
+
     })
 })

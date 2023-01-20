@@ -13,6 +13,7 @@
   "scripts": {},
   "dependencies": {
     "allure-commandline": "^2.20.1",
-    "prettier": "^2.8.3"
+    "prettier": "^2.8.3",
+    "uuid": "^9.0.0"
   }
 }
