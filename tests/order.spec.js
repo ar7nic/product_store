@@ -1,6 +1,6 @@
 import {URLS} from "../const/baseConst";
 import {PAGES} from "../pages/pages";
-import {Assistants} from "../assistants/assistants";
+import {ASSISTANTS} from "../assistants/assistants";
 
 const { test, expect } = require('@playwright/test');
 test.beforeEach(async ({ page }) => {
@@ -8,13 +8,29 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('place order tests', ()=>{
-    test.only('placing order',async ({page})=>{
-        await Assistants.cartAssistant.addToCartFirstItem();
-        await page.locator(PAGES.cartPage.cartMenu).click();
+    test('placing order',async ({page})=>{
+        await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
+        await page.locator(PAGES.mainMenu.cartMenu).click();
         await page.locator(PAGES.cartPage.totalPrice).waitFor();
-    //    await page.waitForTimeout(1000);
-        await Assistants.orderAssistant.placeTheOrder(page);
+        await page.waitForTimeout(2000);
+        await ASSISTANTS.orderAssistant.placeTheOrder(page);
         await page.locator(PAGES.orderPopup.confirmBtn).waitFor();
-        expect(page.locator(PAGES.orderPopup.thanksMsg)).toEqual('Thank you for your purchase!');
+        const msg = await page.locator(PAGES.orderPopup.thanksMsg).textContent();
+        await expect(msg).toEqual('Thank you for your purchase!');
+        await page.locator(PAGES.orderPopup.confirmBtn).click();
+        await page.waitForTimeout(2000);
+        await page.waitForLoadState('networkidle');
+        await page.locator(PAGES.mainMenu.cartMenu).click();
+        await page.waitForLoadState('networkidle');
+        await expect(await page.locator(PAGES.cartPage.totalPrice)).toBeEmpty();
+    })
+
+    test('placing the order without credentials', async ({page})=>{
+        await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
+        await page.locator(PAGES.mainMenu.cartMenu).click();
+        await page.locator(PAGES.cartPage.totalPrice).waitFor();
+        await ASSISTANTS.orderAssistant.placeTheOrderWithMissingData(page);
+        await ASSISTANTS.popupAssistant.popUpAccept(page);
+        await expect(await page.locator(PAGES.orderPopup.name)).toBeVisible();
     })
 })
