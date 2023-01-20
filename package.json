@@ -7,10 +7,12 @@
   "author": "Ar7nic <ar7nic@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@playwright/test": "^1.29.1"
+    "@playwright/test": "^1.29.2",
+    "allure-playwright": "^2.0.0-beta.24"
   },
   "scripts": {},
   "dependencies": {
+    "allure-commandline": "^2.20.1",
     "prettier": "^2.8.3"
   }
 }
