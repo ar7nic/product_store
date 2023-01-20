@@ -10,7 +10,7 @@ import { SignInAssistant } from "./signInAssistant";
 //     orderAssistant = new OrderAssistant();
 // }
 
-export const ASSISTANT = {
+export const ASSISTANTS = {
   loginAssistant: new LoginAssistant(),
   cartAssistant: new CartAssistant(),
   orderAssistant: new OrderAssistant(),
