@@ -1,8 +1,7 @@
-import {User} from "../models/users";
-
 
 export const URLS = {
-    siteUrl : 'https://www.demoblaze.com/index.html',
+    siteUrl : "https://www.demoblaze.com/index.html",
+    addItemAPIUrl : "https://api.demoblaze.com/addtocart",
 }
 
 
