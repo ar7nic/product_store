@@ -8,7 +8,6 @@ const { test, expect } = require('@playwright/test');
 const productId = uuidv4();
 // let token = "YXI3bmljMTY3NDkyMA==";
 let token;
-// const userCookies = {id:`"${productId}"`,cookie:`"${userId}"`,prod_id:1,"flag":false}
 let page;
 
 
@@ -23,17 +22,14 @@ test.beforeAll(async({browser,request})=>{
     });
     const loginResponseJson = await loginResponse.json();
     token = loginResponseJson.split(":")[1].trim();
-    requestPayload = {id: productId, cookie: token, prod_id: 4, flag: true};
 
-// ************** рабочая
-//     const context = await browser.newContext();
     await context.addCookies([{name:"tokenp_",value:token,url:URLS.siteUrl}]);
     page = await context.newPage();
-//***************
+
 })
 test.beforeEach(async ({request}) => {
-    // await context.addCookies([{name:"tokenp_",value:token,url:URLS.siteUrl}]);
-    // page = await context.newPage();
+
+    requestPayload = {id: productId, cookie: token, prod_id: 4, flag: true};
     const apiResponse = await request.post(URLS.addItemAPIUrl,{
         data:requestPayload
     })
