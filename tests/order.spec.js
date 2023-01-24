@@ -6,31 +6,32 @@ import {v4 as uuidv4} from 'uuid';
 import {request} from "@playwright/test";
 const { test, expect } = require('@playwright/test');
 const productId = uuidv4();
-let token = "YXI3bmljMTY3NDkyMA==";
+// let token = "YXI3bmljMTY3NDkyMA==";
+let token;
 // const userCookies = {id:`"${productId}"`,cookie:`"${userId}"`,prod_id:1,"flag":false}
 let page;
 
 
-let requestPayload = {id: productId, cookie: token, prod_id: 4, flag: true};
+let requestPayload;
 let loginPayload = {username: "ar7nic", password: "c3RvcmVQYXNzd29yZA=="};
 
-test.beforeAll(async({browser})=>{
+test.beforeAll(async({browser,request})=>{
 
-    //  context = await request.newContext();
-    // const loginResponse = await context.post(URLS.loginAPIUrl,{
-    //     data:loginPayload
-    // });
-    // const loginResponseJson = await loginResponse.json();
-    // token = loginResponseJson.split(":")[1].trim();
-
+    const context = await browser.newContext();
+    const loginResponse = await request.post(URLS.loginAPIUrl,{
+        data:loginPayload
+    });
+    const loginResponseJson = await loginResponse.json();
+    token = loginResponseJson.split(":")[1].trim();
+    requestPayload = {id: productId, cookie: token, prod_id: 4, flag: true};
 
 // ************** рабочая
-    const context = await browser.newContext();
+//     const context = await browser.newContext();
     await context.addCookies([{name:"tokenp_",value:token,url:URLS.siteUrl}]);
     page = await context.newPage();
 //***************
 })
-test.beforeEach(async ({request,context}) => {
+test.beforeEach(async ({request}) => {
     // await context.addCookies([{name:"tokenp_",value:token,url:URLS.siteUrl}]);
     // page = await context.newPage();
     const apiResponse = await request.post(URLS.addItemAPIUrl,{
@@ -41,7 +42,7 @@ test.beforeEach(async ({request,context}) => {
 });
 
 test.describe('place order tests', ()=>{
-    test('placing order',async ()=>{
+    test.only('placing order',async ()=>{
         // await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
         await test.step('Open the cart', async () => {
             await page.waitForTimeout(2000);
