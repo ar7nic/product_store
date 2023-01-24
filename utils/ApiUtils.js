@@ -18,7 +18,7 @@ class ApiUtils {
         token = loginResponseJson.split(":")[1].trim();
         return token;
     }
-    async setCookies(context){
+    async setTokenToCookies(context){
         await context.addCookies([{name:"tokenp_",value:token,url:URLS.siteUrl}]);
     }
     async addItemToCart(request,prodID){

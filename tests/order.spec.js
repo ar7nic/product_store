@@ -4,6 +4,7 @@ import {ASSISTANTS} from "../assistants/assistants";
 import {USERS} from "../models/users";
 import {v4 as uuidv4} from 'uuid';
 import {request} from "@playwright/test";
+import {APIUTILS} from "../utils/ApiUtils";
 const { test, expect } = require('@playwright/test');
 const productId = uuidv4();
 // let token = "YXI3bmljMTY3NDkyMA==";
@@ -17,23 +18,25 @@ let loginPayload = {username: "ar7nic", password: "c3RvcmVQYXNzd29yZA=="};
 test.beforeAll(async({browser,request})=>{
 
     const context = await browser.newContext();
-    const loginResponse = await request.post(URLS.loginAPIUrl,{
-        data:loginPayload
-    });
-    const loginResponseJson = await loginResponse.json();
-    token = loginResponseJson.split(":")[1].trim();
-
-    await context.addCookies([{name:"tokenp_",value:token,url:URLS.siteUrl}]);
+    await APIUTILS.getToken(request,loginPayload); // new
+    // const loginResponse = await request.post(URLS.loginAPIUrl,{
+    //     data:loginPayload
+    // });
+    // const loginResponseJson = await loginResponse.json();
+    // token = loginResponseJson.split(":")[1].trim();
+    await APIUTILS.setTokenToCookies(context); //new
+    // await context.addCookies([{name:"tokenp_",value:token,url:URLS.siteUrl}]);
     page = await context.newPage();
 
 })
 test.beforeEach(async ({request}) => {
 
-    requestPayload = {id: productId, cookie: token, prod_id: 4, flag: true};
-    const apiResponse = await request.post(URLS.addItemAPIUrl,{
-        data:requestPayload
-    })
-    expect(apiResponse.ok()).toBeTruthy();
+    await APIUTILS.addItemToCart(request,4); //new
+    // requestPayload = {id: productId, cookie: token, prod_id: 4, flag: true};
+    // const apiResponse = await request.post(URLS.addItemAPIUrl,{
+    //     data:requestPayload
+    // })
+    // expect(apiResponse.ok()).toBeTruthy();
     await page.goto(URLS.siteUrl);
 });
 
