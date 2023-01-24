@@ -41,7 +41,7 @@ test.beforeEach(async ({request}) => {
 });
 
 test.describe('place order tests', ()=>{
-    test.only('placing order',async ()=>{
+    test('placing order',async ()=>{
         // await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
         await test.step('Open the cart', async () => {
             await page.waitForTimeout(2000);

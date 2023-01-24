@@ -11,7 +11,7 @@ test.beforeEach(async ({ page }) => {
     await page.goto(URLS.siteUrl);
 });
 
-test.describe('login tests', ()=>{
+test.describe.only('login tests', ()=>{
 
     test('login with wrong user name', async ({page})=>{
 
@@ -31,7 +31,8 @@ test.describe('login tests', ()=>{
         await ASSISTANTS.loginAssistant.loginToSite(page,USERS.testUser.userName,USERS.testUser.userPassword);
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(1000);
-        const welcomeText = await page.locator(PAGES.loginPage.welcomeMenu).textContent();
+        const welcomeText = await PAGES.mainMenu.welcomeMenu.getText(page);
+        // const welcomeText = await page.locator(PAGES.mainMenu.welcomeMenu).textContent();
         await expect(welcomeText).toEqual('Welcome '+ USERS.testUser.userName);
 
     })
