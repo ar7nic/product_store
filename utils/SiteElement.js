@@ -44,11 +44,18 @@ export class SiteElement {
         })
     }
 
-    async getFirstElem(page){
-        return await test.step(`Get first element from ${this.elementName} at ${this.pageName}`,async ()=>{
-            return await page.locator(this.elemLocator).first();
+    async getTextOfFirstElem(page){
+        return await test.step(`Get text of first element from ${this.elementName} at ${this.pageName}`,async ()=>{
+            return await page.locator(this.elemLocator).first().textContent();
         })
     }
+
+    async clickOnFirstElem(page){
+        return await test.step(`Click on first element from ${this.elementName} at ${this.pageName}`,async ()=>{
+            return await page.locator(this.elemLocator).first().click();
+        })
+    }
+
 
     async getItems(page){
         return await test.step(`Get elements from ${this.elementName} at ${this.pageName}`,async ()=>{
@@ -59,7 +66,7 @@ export class SiteElement {
     async waitForElem(page){
         await   test.step(`Wait for element ${this.elementName} at ${this.pageName}`, async ()=>{
             // const page = await context.newPage();
-            await page.locator(this.elemLocator).waitFor();
+            await page.locator(this.elemLocator).first().waitFor();
         })
     }
 }

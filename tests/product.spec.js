@@ -8,9 +8,9 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('product items tests', ()=>{
     test('product title is the same in main and product pages',async ({page})=>{
-        const prodTitleMain = await PAGES.categoriesPage.itemsTitles.getFirstElem(page).textContent();    //TODO
+        const prodTitleMain = await PAGES.categoriesPage.itemsTitles.getTextOfFirstElem(page)
        // const prodTitleMain = await page.locator(PAGES.categoriesPage.itemsTitles).first().textContent();
-        await PAGES.categoriesPage.itemsTitles.getFirstElem(page).click(); //TODO
+        await PAGES.categoriesPage.itemsTitles.clickOnFirstElem(page);
        // await page.locator(PAGES.categoriesPage.itemsTitles).first().click();
         const prodTitleOnPage = await PAGES.productPage.prodTitle.getText(page);
        // const prodTitleOnPage = await page.locator(PAGES.productPage.prodTitle).textContent();
@@ -18,9 +18,9 @@ test.describe('product items tests', ()=>{
     })
 
     test('product price is the same in main and product pages',async ({page})=>{
-        const prodPriceMain = await PAGES.categoriesPage.itemsPrices.getFirstElem(page).textContent();
+        const prodPriceMain = await PAGES.categoriesPage.itemsPrices.getTextOfFirstElem(page)
         // const prodPriceMain = await page.locator(PAGES.categoriesPage.itemsPrices).first().textContent();
-        await PAGES.categoriesPage.itemsTitles.getFirstElem(page).click();
+        await PAGES.categoriesPage.itemsTitles.clickOnFirstElem(page);
         // await page.locator(PAGES.categoriesPage.itemsTitles).first().click();
         const prodPriceOnPage = (
             await PAGES.productPage.prodPrice.getText(page)

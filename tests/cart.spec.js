@@ -20,9 +20,9 @@ test.describe('cart-tests', ()=>{
         const element = await ASSISTANTS.cartAssistant.findItemsInCart(page,prodForCart.prodName);
         await expect(prodForCart.prodName).toEqual(
             // await PAGES.cartPage.itemTitlePath.
-            await element.locator(PAGES.cartPage.itemTitlePath).textContent()   //TODO
+            await element.locator(PAGES.cartPage.itemTitlePath.elemLocator).textContent()   //TODO
         );
-        await expect(prodForCart.prodPrice.split("$")[1].trim()).toEqual(await element.locator(PAGES.cartPage.itemPricePath).textContent());
+        await expect(prodForCart.prodPrice.split("$")[1].trim()).toEqual(await element.locator(PAGES.cartPage.itemPricePath.elemLocator).textContent());
 
     })
 
@@ -32,7 +32,7 @@ test.describe('cart-tests', ()=>{
         await PAGES.mainMenu.cartMenu.clickElem(page);
         // await page.locator(PAGES.mainMenu.cartMenu).click();
         await page.waitForTimeout(2000);
-        await PAGES.cartPage.cartItems.getFirstElem(page).waitFor();
+        await PAGES.cartPage.cartItems.waitForElem(page);
         // await page.locator(PAGES.cartPage.cartItems).first().waitFor();
         const totalPrice = parseInt(
             await PAGES.cartPage.totalPrice.getText(page)

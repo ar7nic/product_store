@@ -11,7 +11,7 @@ export class CartAssistant {
 
   async addToCartFirstItem(page) {
     await page.waitForLoadState("networkidle");
-    await PAGES.categoriesPage.itemsTitles.getFirstElem(page).click(); // TODO figure out how to implement
+    await PAGES.categoriesPage.itemsTitles.clickOnFirstElem(page); // TODO figure out how to implement
     // await page.locator(PAGES.categoriesPage.itemsTitles).first().click();
     await page.waitForLoadState("networkidle");
     const prodName = await PAGES.productPage.prodTitle.getText(page);
@@ -39,7 +39,7 @@ export class CartAssistant {
       if (
         (await itemsInCart
           .nth(i)
-          .locator(PAGES.cartPage.itemTitlePath) // TODO figure out
+          .locator(PAGES.cartPage.itemTitlePath.elemLocator) // TODO figure out
           .textContent()) === prodName
       ) {
         return itemsInCart.nth(i);
@@ -50,7 +50,7 @@ export class CartAssistant {
   async deleteItemFromCart(page, prodName) {
     const element = await this.findItemsInCart(page, prodName);
 
-    await element.locator(PAGES.cartPage.itemDelBtnPath).click(); //TODO figure out
+    await element.locator(PAGES.cartPage.itemDelBtnPath.elemLocator).click(); //TODO figure out
 
   }
 }
