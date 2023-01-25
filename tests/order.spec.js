@@ -42,14 +42,12 @@ test.beforeEach(async ({request}) => {
 
 test.describe('place order tests', ()=>{
     test('placing order',async ()=>{
-        // await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
+
         await test.step('Open the cart', async () => {
             await page.waitForTimeout(2000);
             await PAGES.mainMenu.cartMenu.clickElem(page);
-            // await page.locator(PAGES.mainMenu.cartMenu).click();
             await page.waitForTimeout(2000);
             await PAGES.cartPage.totalPrice.waitForElem(page);
-            // await page.locator(PAGES.cartPage.totalPrice).waitFor();
             await page.waitForTimeout(2000);
         })
         await test.step('Place the order',async ()=>{
@@ -57,18 +55,14 @@ test.describe('place order tests', ()=>{
         })
         await test.step('Check if confirm pop-up is opened, accepting it',async ()=>{
             await PAGES.orderPopup.confirmBtn.waitForElem(page);
-            // await page.locator(PAGES.orderPopup.confirmBtn).waitFor();
             const msg = await PAGES.orderPopup.thanksMsg.getText(page);
-            // const msg = await page.locator(PAGES.orderPopup.thanksMsg).textContent();
             await expect(msg).toEqual('Thank you for your purchase!');
             await PAGES.orderPopup.confirmBtn.clickElem(page);
-            // await page.locator(PAGES.orderPopup.confirmBtn).click();
             await page.waitForTimeout(2000);
         })
         await test.step('Check if the cart is empty after the order placed',async ()=>{
             await page.waitForLoadState('networkidle');
             await PAGES.mainMenu.cartMenu.clickElem(page);
-            // await page.locator(PAGES.mainMenu.cartMenu).click();
             await page.waitForLoadState('networkidle');
             await expect(await page.locator(PAGES.cartPage.totalPrice.elemLocator)).toBeEmpty();
         })
@@ -79,9 +73,8 @@ test.describe('place order tests', ()=>{
         // await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
         await test.step('Open the cart', async ()=> {
             await PAGES.mainMenu.cartMenu.clickElem(page);
-            // await page.locator(PAGES.mainMenu.cartMenu).click();
             await PAGES.cartPage.totalPrice.waitForElem(page);
-            // await page.locator(PAGES.cartPage.totalPrice).waitFor();
+
         })
 
         await test.step('Placing the order', async ()=>{

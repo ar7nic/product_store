@@ -1,5 +1,4 @@
 import {URLS} from "../const/baseConst";
-import {PAGES} from "../pages/pages";
 import {ASSISTANTS} from "../assistants/assistants";
 import {USERS} from "../models/users";
 
