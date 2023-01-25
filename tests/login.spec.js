@@ -13,7 +13,7 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('login tests', ()=>{
 
-    test('login with wrong user name', async ({page})=>{
+    test.only('login with wrong user name', async ({page})=>{
 
         await ASSISTANTS.loginAssistant.loginToSite(page,MyUtils.randomString(),USERS.testUser.userPassword);
         await expect(await ASSISTANTS.popupAssistant.popUpAccept(page)).toEqual('User does not exist.');
