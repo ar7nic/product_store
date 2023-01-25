@@ -10,9 +10,15 @@
     "@playwright/test": "^1.29.2",
     "allure-playwright": "^2.0.0-beta.24"
   },
-  "scripts": {},
+  "scripts": {
+    "clean": "rimraf allure-report/ && rimraf allure-results",
+    "test:reporter": "npm run clean && npx playwright test",
+    "allure-report": "npx allure generate ./allure-results --clean && allure open"
+  },
   "dependencies": {
     "allure-commandline": "^2.20.1",
-    "prettier": "^2.8.3"
+    "prettier": "^2.8.3",
+    "rimraf": "^4.1.1",
+    "uuid": "^9.0.0"
   }
 }

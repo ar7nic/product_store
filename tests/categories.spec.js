@@ -9,7 +9,8 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('category menu tests', ()=>{
     test('items filtered by category Laptops', async ({page})=>{
-        await page.locator(PAGES.categoriesPage.laptopMenu).click();
-        await expect(page.locator(PAGES.categoriesPage.itemsDescriptions).first()).toContainText("laptop");
+        await PAGES.categoriesPage.laptopMenu.clickElem(page);
+        // await page.locator(PAGES.categoriesPage.laptopMenu).click();
+        await expect(page.locator(PAGES.categoriesPage.itemsDescriptions.elemLocator).first()).toContainText("laptop");
     })
 })
