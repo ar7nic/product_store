@@ -37,6 +37,25 @@ export class SiteElement {
         })
     }
 
+    async getAllText(page){
+        return await test.step(`Get ALL text from ${this.elementName} at ${this.pageName}`, async ()=>{
+            // const page = await context.newPage();
+            return await page.locator(this.elemLocator).allTextContents();
+        })
+    }
+
+    async getFirstElem(page){
+        return await test.step(`Get first element from ${this.elementName} at ${this.pageName}`,async ()=>{
+            return await page.locator(this.elemLocator).first();
+        })
+    }
+
+    async getItems(page){
+        return await test.step(`Get elements from ${this.elementName} at ${this.pageName}`,async ()=>{
+            return await page.locator(this.elemLocator);
+        })
+    }
+
     async waitForElem(page){
         await   test.step(`Wait for element ${this.elementName} at ${this.pageName}`, async ()=>{
             // const page = await context.newPage();

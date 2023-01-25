@@ -10,22 +10,30 @@ test.describe('pagination tests', ()=>{
     test('elements on the second page are different',async ({page})=>{
 
        await  page.waitForLoadState('networkidle');
-       const elementsOnFirst = await page.locator(PAGES.paginationPage.itemCardTitle).allTextContents();
-       await page.locator(PAGES.paginationPage.nextButton).click();
+       const elementsOnFirst = await PAGES.paginationPage.itemCardTitle.getAllText(page);
+        // const elementsOnFirst = await page.locator(PAGES.paginationPage.itemCardTitle).allTextContents();
+        await PAGES.paginationPage.nextButton.clickElem(page);
+       // await page.locator(PAGES.paginationPage.nextButton).click();
        await page.waitForTimeout(1000);
-       const elementsOnSecond = await page.locator(PAGES.paginationPage.itemCardTitle).allTextContents();
+        const elementsOnSecond = await PAGES.paginationPage.itemCardTitle.getAllText(page);
+       // const elementsOnSecond = await page.locator(PAGES.paginationPage.itemCardTitle).allTextContents();
        await expect(elementsOnSecond).not.toEqual(elementsOnFirst);
 
     })
     test('elements on the first page are the same after paging',async ({page})=>{
         await  page.waitForLoadState('networkidle');
-        const elementsOnFirst = await page.locator(PAGES.paginationPage.itemCardTitle).allTextContents();
-        await page.locator(PAGES.paginationPage.nextButton).click();
+        const elementsOnFirst = await PAGES.paginationPage.itemCardTitle.getAllText(page);
+        // const elementsOnFirst = await page.locator(PAGES.paginationPage.itemCardTitle).allTextContents();
+        await PAGES.paginationPage.nextButton.clickElem(page);
+        // await page.locator(PAGES.paginationPage.nextButton).click();
         await page.waitForTimeout(1000);
-        const elementsOnSecond = await page.locator(PAGES.paginationPage.itemCardTitle).allTextContents();
-        await page.locator(PAGES.paginationPage.previousButton).click();
+        const elementsOnSecond = await PAGES.paginationPage.itemCardTitle.getAllText(page);
+        // const elementsOnSecond = await page.locator(PAGES.paginationPage.itemCardTitle).allTextContents();
+        await PAGES.paginationPage.previousButton.clickElem(page);
+        // await page.locator(PAGES.paginationPage.previousButton).click();
         await page.waitForTimeout(1000);
-        const elementsOnPrev = await page.locator(PAGES.paginationPage.itemCardTitle).allTextContents();
+        const elementsOnPrev = await PAGES.paginationPage.itemCardTitle.getAllText(page);
+        // const elementsOnPrev = await page.locator(PAGES.paginationPage.itemCardTitle).allTextContents();
         await expect(elementsOnSecond).not.toEqual(elementsOnFirst);
         await expect(elementsOnPrev).toEqual(elementsOnFirst);
     })

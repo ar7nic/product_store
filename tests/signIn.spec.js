@@ -12,9 +12,8 @@ test.describe('sign in tests', ()=>{
 
     test('sign in with existing user', async({page})=>{
 
-        await ASSISTANTS.signInAssistant.signInToSite(page,USERS.testUser.userName,USERS.testUser.userPassword);
+        await ASSISTANTS.signInAssistant.signInToSite(page,USERS.testUser.userName,USERS.testUser);
         await expect(await ASSISTANTS.popupAssistant.popUpAccept(page)).toEqual('This user already exist.');
-
 
     })
 });

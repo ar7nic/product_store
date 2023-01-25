@@ -45,26 +45,32 @@ test.describe('place order tests', ()=>{
         // await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
         await test.step('Open the cart', async () => {
             await page.waitForTimeout(2000);
-            await page.locator(PAGES.mainMenu.cartMenu).click();
+            await PAGES.mainMenu.cartMenu.clickElem(page);
+            // await page.locator(PAGES.mainMenu.cartMenu).click();
             await page.waitForTimeout(2000);
-            await page.locator(PAGES.cartPage.totalPrice).waitFor();
+            await PAGES.cartPage.totalPrice.waitForElem(page);
+            // await page.locator(PAGES.cartPage.totalPrice).waitFor();
             await page.waitForTimeout(2000);
         })
         await test.step('Place the order',async ()=>{
             await ASSISTANTS.orderAssistant.placeTheOrder(page,USERS.testUser);
         })
         await test.step('Check if confirm pop-up is opened, accepting it',async ()=>{
-            await page.locator(PAGES.orderPopup.confirmBtn).waitFor();
-            const msg = await page.locator(PAGES.orderPopup.thanksMsg).textContent();
+            await PAGES.orderPopup.confirmBtn.waitForElem(page);
+            // await page.locator(PAGES.orderPopup.confirmBtn).waitFor();
+            const msg = await PAGES.orderPopup.thanksMsg.getText(page);
+            // const msg = await page.locator(PAGES.orderPopup.thanksMsg).textContent();
             await expect(msg).toEqual('Thank you for your purchase!');
-            await page.locator(PAGES.orderPopup.confirmBtn).click();
+            await PAGES.orderPopup.confirmBtn.clickElem(page);
+            // await page.locator(PAGES.orderPopup.confirmBtn).click();
             await page.waitForTimeout(2000);
         })
         await test.step('Check if the cart is empty after the order placed',async ()=>{
             await page.waitForLoadState('networkidle');
-            await page.locator(PAGES.mainMenu.cartMenu).click();
+            await PAGES.mainMenu.cartMenu.clickElem(page);
+            // await page.locator(PAGES.mainMenu.cartMenu).click();
             await page.waitForLoadState('networkidle');
-            await expect(await page.locator(PAGES.cartPage.totalPrice)).toBeEmpty();
+            await expect(await page.locator(PAGES.cartPage.totalPrice.elemLocator)).toBeEmpty();
         })
 
     })
@@ -72,8 +78,10 @@ test.describe('place order tests', ()=>{
     test('placing the order without credentials', async ()=>{
         // await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
         await test.step('Open the cart', async ()=> {
-            await page.locator(PAGES.mainMenu.cartMenu).click();
-            await page.locator(PAGES.cartPage.totalPrice).waitFor();
+            await PAGES.mainMenu.cartMenu.clickElem(page);
+            // await page.locator(PAGES.mainMenu.cartMenu).click();
+            await PAGES.cartPage.totalPrice.waitForElem(page);
+            // await page.locator(PAGES.cartPage.totalPrice).waitFor();
         })
 
         await test.step('Placing the order', async ()=>{
@@ -81,7 +89,7 @@ test.describe('place order tests', ()=>{
         })
 
         await test.step('Check if the pop-up still active', async ()=>{
-            await expect(await page.locator(PAGES.orderPopup.name)).toBeVisible();
+            await expect(await page.locator(PAGES.orderPopup.name.elemLocator)).toBeVisible();
         })
 
     })
