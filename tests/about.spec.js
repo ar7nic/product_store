@@ -10,14 +10,11 @@ test.beforeEach(async ({ page }) => {
 test.describe('about-us tests', ()=>{
     test('about-video is presents',async ({page})=>{
         await PAGES.mainMenu.aboutUsMenu.clickElem(page);
-        // await page.locator(PAGES.mainMenu.aboutUsMenu).click();
         await expect(page.locator(PAGES.aboutPage.modalVideo.elemLocator)).toBeVisible();
     })
     test('about-us pop-up is closable',async ({page})=>{
         await PAGES.mainMenu.aboutUsMenu.clickElem(page);
-        // await page.locator(PAGES.mainMenu.aboutUsMenu).click();
         await PAGES.aboutPage.modalCloseButton.clickElem(page);
-        // await page.locator(PAGES.aboutPage.modalCloseButton).click();
         await page.waitForTimeout(2000);
         await expect(page.locator(PAGES.aboutPage.modalWindow.elemLocator)).toHaveAttribute("style", "display: none;");
     })

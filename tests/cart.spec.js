@@ -1,6 +1,7 @@
 import {URLS} from "../const/baseConst";
 import {PAGES} from "../pages/pages";
 import {ASSISTANTS} from "../assistants/assistants";
+import {ASSERTS} from "../asserts/asserts";
 
 const { test, expect } = require('@playwright/test');
 test.beforeEach(async ({ page }) => {
@@ -11,18 +12,17 @@ test.describe('cart-tests', ()=>{
     test('adding items to cart',async ({page})=>{
 
         const prodForCart = await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
-        await ASSISTANTS.cartAssistant.popUpAccept(page);
+        await ASSISTANTS.popupAssistant.popUpAccept(page);
         await PAGES.mainMenu.cartMenu.clickElem(page);
-        // await page.locator(PAGES.mainMenu.cartMenu).click();
         await PAGES.cartPage.cartItems.waitForElem(page);
-        // await page.locator(PAGES.cartPage.cartItems).waitFor();
         await page.waitForTimeout(1000);
-        const element = await ASSISTANTS.cartAssistant.findItemsInCart(page,prodForCart.prodName);
-        await expect(prodForCart.prodName).toEqual(
-            // await PAGES.cartPage.itemTitlePath.
-            await element.locator(PAGES.cartPage.itemTitlePath.elemLocator).textContent()   //TODO
-        );
-        await expect(prodForCart.prodPrice.split("$")[1].trim()).toEqual(await element.locator(PAGES.cartPage.itemPricePath.elemLocator).textContent());
+        // const element = await ASSISTANTS.cartAssistant.findItemsInCart(page,prodForCart.prodName);
+        // await expect(prodForCart.prodName).toEqual(
+        //     await element.locator(PAGES.cartPage.itemTitlePath.elemLocator).textContent()   //TODO
+        // );
+        await ASSERTS.cartAsserts.productAddedToCartPresentsInTheCart(page,prodForCart.prodName);
+        await ASSERTS.cartAsserts.productPriceAddedToCartMatchesPriceInCart(page,prodForCart.prodName,prodForCart.prodPrice);
+        // await expect(prodForCart.prodPrice.split("$")[1].trim()).toEqual(await element.locator(PAGES.cartPage.itemPricePath.elemLocator).textContent());
 
     })
 
@@ -30,22 +30,19 @@ test.describe('cart-tests', ()=>{
 
         const prodForCart = await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
         await PAGES.mainMenu.cartMenu.clickElem(page);
-        // await page.locator(PAGES.mainMenu.cartMenu).click();
         await page.waitForTimeout(2000);
         await PAGES.cartPage.cartItems.waitForElem(page);
-        // await page.locator(PAGES.cartPage.cartItems).first().waitFor();
         const totalPrice = parseInt(
             await PAGES.cartPage.totalPrice.getText(page)
-            // await page.locator(PAGES.cartPage.totalPrice).textContent()
         );
         await ASSISTANTS.cartAssistant.deleteItemFromCart(page, prodForCart.prodName);
-        await page.waitForLoadState('networkidle');
-        await page.waitForTimeout(2000);
+        // await page.waitForLoadState('networkidle');
+        // await page.waitForTimeout(2000);
         const delSuccess = parseInt(
-            await PAGES.cartPage.totalPrice.getText(page)
-            // await page.locator(PAGES.cartPage.totalPrice).textContent()
+            await PAGES.cartPage.totalPrice.getText(page) //TODO calculations transfer to Asserts or there
         ) < totalPrice;
-        await expect(delSuccess).toBeTruthy;
+        await ASSERTS.cartAsserts.totalPriceIsLessAfterDeletingItem(page,delSuccess);
+        // await expect(delSuccess).toBeTruthy;
 
     })
 })
