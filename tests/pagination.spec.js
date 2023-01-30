@@ -1,5 +1,6 @@
 import {URLS} from "../const/baseConst";
 import {PAGES} from "../pages/pages";
+import {ASSERTS} from "../asserts/asserts";
 
 const { test, expect } = require('@playwright/test');
 test.beforeEach(async ({ page }) => {
@@ -14,7 +15,7 @@ test.describe('pagination tests', ()=>{
         await PAGES.paginationPage.nextButton.clickElem(page);
         await page.waitForTimeout(1000);
         const elementsOnSecond = await PAGES.paginationPage.itemCardTitle.getAllText(page);
-        await expect(elementsOnSecond).not.toEqual(elementsOnFirst);
+        await ASSERTS.paginationAsserts.elementsOnSecondPageAreDiff(page,elementsOnFirst,elementsOnSecond);
 
     })
     test('elements on the first page are the same after paging',async ({page})=>{
@@ -26,7 +27,8 @@ test.describe('pagination tests', ()=>{
         await PAGES.paginationPage.previousButton.clickElem(page);
         await page.waitForTimeout(1000);
         const elementsOnPrev = await PAGES.paginationPage.itemCardTitle.getAllText(page);
-        await expect(elementsOnSecond).not.toEqual(elementsOnFirst);
-        await expect(elementsOnPrev).toEqual(elementsOnFirst);
+        await ASSERTS.paginationAsserts.elementsOnSecondPageAreDiff(page,elementsOnFirst,elementsOnSecond);
+        await ASSERTS.paginationAsserts.elementsOnFirstPageAreSame(page,elementsOnFirst,elementsOnPrev);
+
     })
 })

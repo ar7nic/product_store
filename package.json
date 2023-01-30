@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "allure-commandline": "^2.20.1",
+    "chai": "*",
     "prettier": "^2.8.3",
     "rimraf": "^4.1.1",
     "uuid": "^9.0.0"

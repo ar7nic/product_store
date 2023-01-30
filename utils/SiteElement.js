@@ -53,10 +53,23 @@ export class SiteElement {
 
 
     async getItems(page){
-        return await test.step(`Get elements from "${this.elementName}" at "${this.pageName}"`,async ()=>{
+        return await test.step(`Get element(s) "${this.elementName}" at "${this.pageName}"`,async ()=>{
             return await page.locator(this.elemLocator);
         })
     }
+    async getAttribute(page,attrName){
+        return await test.step(`Get attribute "${attrName}" of "${this.elementName}" at "${this.pageName}"`,async ()=>{
+            return await page.locator(this.elemLocator).getAttribute(attrName);
+        })
+    }
+
+
+    // async getElement(page){
+    //
+    //     return await test.step(`Get element from "${this.elementName}" at "${this.pageName}"`,async ()=>{
+    //
+    //     })
+    // }
 
     async waitForElem(page){
         await   test.step(`Wait for element "${this.elementName}" at "${this.pageName}"`, async ()=>{
