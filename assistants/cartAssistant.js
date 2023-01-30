@@ -9,11 +9,14 @@ export class CartAssistant {
     await PAGES.categoriesPage.itemsTitles.clickOnFirstElem(page);
     await page.waitForLoadState("networkidle");
     const prodName = await PAGES.productPage.prodTitle.getText(page);
-    const prodPrice =(await PAGES.productPage.prodPrice.getText(page)).match("\d");
-    await PAGES.productPage.addToCartBtn.clickElem(page);
-    await ASSISTANTS.popupAssistant.popUpAccept(page);
-    await page.waitForTimeout(1000);
-    return { prodName, prodPrice };
+    const prodPrice = await (await PAGES.productPage.prodPrice.getText(page)).match(/\d+/)[0];
+    let msg;
+     const  popupMsg = Promise.all([
+     await  PAGES.productPage.addToCartBtn.clickElem(page),
+     msg = await ASSISTANTS.popupAssistant.popUpAccept(page)
+    ])
+    await page.waitForTimeout(2000);
+    return { prodName, prodPrice ,msg};
   }
 
   // async findItemsInCart(page, prodName) {
@@ -30,9 +33,7 @@ export class CartAssistant {
   //     }
   //   }
   // }
-  async findItemsInCart(page, prodName){
 
-  }
 
 
   async deleteItemFromCart(page, prodName) {
@@ -40,9 +41,6 @@ export class CartAssistant {
     await PAGES.cartPage.itemDelBtn(prodName).clickElem(page);
     await page.waitForLoadState('networkidle');
     await page.waitForTimeout(2000);
-
-    // const element = await this.findItemsInCart(page, prodName);
-    // await element.locator(PAGES.cartPage.itemDelBtnPath.elemLocator).click(); //TODO figure out
 
   }
 }

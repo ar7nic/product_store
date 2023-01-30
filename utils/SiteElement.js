@@ -57,9 +57,9 @@ export class SiteElement {
             return await page.locator(this.elemLocator);
         })
     }
-    async getAttribute(page){
-        return await test.step(`Get attr "${this.elementName}" at "${this.pageName}"`,async ()=>{
-            return page.locator(this.elemLocator).getPropertyValue("style");
+    async getAttribute(page,attrName){
+        return await test.step(`Get attribute "${attrName}" of "${this.elementName}" at "${this.pageName}"`,async ()=>{
+            return await page.locator(this.elemLocator).getAttribute(attrName);
         })
     }
 

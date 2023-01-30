@@ -3,14 +3,15 @@ const { test } = require('@playwright/test');
 const {expect} = require('chai')
 export class CartAsserts {
 
+
     async productAddedToCartPresentsInTheCart(page,prodName){
         await test.step(`ASSERT Product "${prodName}" added to cart is present in the cart`, async () => {
-            await expect(PAGES.cartPage.cartItem(prodName).getText(page)).to.equal(prodName);
+            await expect(await PAGES.cartPage.cartItem(prodName).getText(page)).to.equal(prodName);
         })
     }
     async productPriceAddedToCartMatchesPriceInCart(page,prodName,prodPrice){
         await test.step(`ASSERT Price of product "${prodName}" is the same in the cart`, async () => {
-            await expect(PAGES.cartPage.itemPrice(prodName).getText(page)).to.equal(prodPrice);
+            await expect(await PAGES.cartPage.itemPrice(prodName).getText(page)).to.equal(prodPrice);
         })
     }
     async totalPriceIsLessAfterDeletingItem(page, success){

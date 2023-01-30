@@ -14,21 +14,18 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('login tests', ()=>{
 
-    test.only('login with wrong user name', async ({page})=>{
+    test('login with wrong user name', async ({page})=>{
 
         await ASSISTANTS.loginAssistant.loginToSite(page,MyUtils.randomString(),USERS.testUser.userPassword);
-        await ASSERTS.authAsserts.expectAlertWithText(page,'User does not exist.');
+        await ASSERTS.popUpAsserts.expectAlertWithText(page,'User does not exist.');
         await ASSERTS.authAsserts.expectLoginPopupIsVisible(page);
-        // await expect(page.locator(PAGES.loginPage.loginModal.elemLocator)).toBeVisible;
-        // await expect(await ASSISTANTS.popupAssistant.popUpAccept(page)).toEqual('User does not exist.');
 
     })
 
     test('login with wrong password', async ({page})=>{
-
         await ASSISTANTS.loginAssistant.loginToSite(page,USERS.testUser.userName,MyUtils.randomString());
-        await expect(await ASSISTANTS.popupAssistant.popUpAccept(page)).toEqual('Wrong password.');
-
+        await ASSERTS.popUpAsserts.expectAlertWithText(page,'Wrong password.');
+        await ASSERTS.authAsserts.expectLoginPopupIsVisible(page);
     })
 
     test('can successfully login into account', async ({page})=>{
@@ -36,9 +33,8 @@ test.describe('login tests', ()=>{
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(2000);
         const welcomeText = await PAGES.mainMenu.welcomeMenu.getText(page);
-        // console.log(welcomeText)
-        // const welcomeText = await page.locator(PAGES.mainMenu.welcomeMenu).textContent();
-        await expect(welcomeText).toEqual('Welcome '+ USERS.testUser.userName);
+        await ASSERTS.authAsserts.expectUserMenuIsVisible(page,'Welcome '+ USERS.testUser.userName);
+
 
     })
 

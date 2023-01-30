@@ -1,5 +1,6 @@
 import {URLS} from "../const/baseConst";
 import {PAGES} from "../pages/pages";
+import {ASSERTS} from "../asserts/asserts";
 
 const { test, expect } = require('@playwright/test');
 
@@ -10,12 +11,14 @@ test.beforeEach(async ({ page }) => {
 test.describe('about-us tests', ()=>{
     test('about-video is presents',async ({page})=>{
         await PAGES.mainMenu.aboutUsMenu.clickElem(page);
-        await expect(page.locator(PAGES.aboutPage.modalVideo.elemLocator)).toBeVisible();
+        await ASSERTS.aboutAsserts.videoIsPresent(page,'src');
+
     })
     test('about-us pop-up is closable',async ({page})=>{
         await PAGES.mainMenu.aboutUsMenu.clickElem(page);
         await PAGES.aboutPage.modalCloseButton.clickElem(page);
         await page.waitForTimeout(2000);
-        await expect(page.locator(PAGES.aboutPage.modalWindow.elemLocator)).toHaveAttribute("style", "display: none;");
+        await ASSERTS.aboutAsserts.videoPopupWindowIsClosable(page);
+
     })
 })

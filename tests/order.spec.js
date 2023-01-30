@@ -2,17 +2,10 @@ import {URLS} from "../const/baseConst";
 import {PAGES} from "../pages/pages";
 import {ASSISTANTS} from "../assistants/assistants";
 import {USERS} from "../models/users";
-import {v4 as uuidv4} from 'uuid';
-import {request} from "@playwright/test";
 import {APIUTILS} from "../utils/ApiUtils";
+import {ASSERTS} from "../asserts/asserts";
 const { test, expect } = require('@playwright/test');
-const productId = uuidv4();
-// let token = "YXI3bmljMTY3NDkyMA==";
-let token;
 let page;
-
-
-let requestPayload;
 let loginPayload = {username: "ar7nic", password: "c3RvcmVQYXNzd29yZA=="};
 
 test.beforeAll(async({browser,request})=>{
@@ -56,7 +49,7 @@ test.describe('place order tests', ()=>{
         await test.step('Check if confirm pop-up is opened, accepting it',async ()=>{
             await PAGES.orderPopup.confirmBtn.waitForElem(page);
             const msg = await PAGES.orderPopup.thanksMsg.getText(page);
-            await expect(msg).toEqual('Thank you for your purchase!');
+            await ASSERTS.orderAsserts.thankYouPopupIsShown(page,msg);
             await PAGES.orderPopup.confirmBtn.clickElem(page);
             await page.waitForTimeout(2000);
         })
@@ -64,25 +57,26 @@ test.describe('place order tests', ()=>{
             await page.waitForLoadState('networkidle');
             await PAGES.mainMenu.cartMenu.clickElem(page);
             await page.waitForLoadState('networkidle');
-            await expect(await page.locator(PAGES.cartPage.totalPrice.elemLocator)).toBeEmpty();
+            await ASSERTS.orderAsserts.cartIsEmptyAfterOrder(page);
+
         })
 
     })
 
     test('placing the order without credentials', async ()=>{
-        // await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
         await test.step('Open the cart', async ()=> {
             await PAGES.mainMenu.cartMenu.clickElem(page);
             await PAGES.cartPage.totalPrice.waitForElem(page);
-
         })
 
         await test.step('Placing the order', async ()=>{
             await ASSISTANTS.orderAssistant.placeTheOrderWithMissingData(page,USERS.testUser);
         })
 
+
         await test.step('Check if the pop-up still active', async ()=>{
-            await expect(await page.locator(PAGES.orderPopup.name.elemLocator)).toBeVisible();
+            await ASSERTS.orderAsserts.orderPopupIsVisible(page);
+
         })
 
     })

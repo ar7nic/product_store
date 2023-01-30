@@ -4,20 +4,29 @@ const { test } = require('@playwright/test');
 const {expect} = require('chai')
 
 
-
-
-
 export class AuthAsserts {
-    async expectAlertWithText(page, msg){
-        await test.step(`ASSERT Pop-up window with text "${msg}" expected`, async () => {
-            await expect(await ASSISTANTS.popupAssistant.popUpAccept(page)).to.equal(msg);
-            //         await expect(await ASSISTANTS.popupAssistant.popUpAccept(page)).toEqual('User does not exist.');
-        })
-    }
+
 
     async expectLoginPopupIsVisible(page){
         await test.step(`ASSERT Login Pop-up window is visible`, async () => {
-            // await expect(await PAGES.loginPage.loginModal.getItems(page)).to.have.attribute('style','display: block;');
+            const attr = await PAGES.loginPage.loginModal.getAttribute(page, "style");
+            await expect(attr).to.equal('display: block;');
+
+        })
+    }
+
+    async expectUserMenuIsVisible(page, menuText){
+        await test.step(`ASSERT User menu added to main menu as"${menuText}"`, async () => {
+            await expect(await PAGES.mainMenu.welcomeMenu.getText(page)).to.equal(menuText);
+
+        })
+    }
+
+    async expectSignInPopupIsVisible(page){
+        await test.step(`ASSERT Login Pop-up window is visible`, async () => {
+            const attr = await PAGES.signInPopUp.signInModal.getAttribute(page, "style");
+            await expect(attr).to.equal('display: block;');
+
         })
     }
 }

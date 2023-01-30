@@ -3,6 +3,7 @@ import {SiteElement} from "../utils/SiteElement";
 const pageName = 'Order Pop-up'
 export class OrderPopup {
 
+    modalWindow = new SiteElement('Pop-up window', pageName, "//div[@id='orderModal']");
     name = new SiteElement('Name input',pageName,"//input[@id='name']");
     country = new SiteElement('Country input',pageName,"//input[@id='country']");
     city = new SiteElement('City input',pageName,"//input[@id='city']");
