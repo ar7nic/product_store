@@ -1,4 +1,4 @@
-import {SiteElement} from "../utils/SiteElement";
+import {SiteElement} from "../../utils/elements/SiteElement";
 
 const pageName = 'Product page'
 export class ProductPage {

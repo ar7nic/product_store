@@ -1,6 +1,7 @@
-import {URLS} from "../const/baseConst";
-import {PAGES} from "../pages/pages";
-import {ASSERTS} from "../asserts/asserts";
+import {URLS} from "../core/const/baseConst";
+import {PAGES} from "../core/pages/pages";
+import {ASSERTS} from "../core/asserts/asserts";
+import {REPORTER} from "../utils/reporter/reporterAdapter";
 
 const { test, expect } = require('@playwright/test');
 test.beforeEach(async ({ page }) => {
@@ -8,7 +9,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('product items tests', ()=>{
-    test('product title is the same in main and product pages',async ({page})=>{
+    REPORTER.it('product title is the same in main and product pages',async ({page})=>{
         const prodTitleMain = await PAGES.categoriesPage.itemsTitles.getTextOfFirstElem(page)
         await PAGES.categoriesPage.itemsTitles.clickOnFirstElem(page);
         const prodTitleOnPage = await PAGES.productPage.prodTitle.getText(page);
@@ -16,7 +17,7 @@ test.describe('product items tests', ()=>{
 
     })
 
-    test('product price is the same in main and product pages',async ({page})=>{
+    REPORTER.it('product price is the same in main and product pages',async ({page})=>{
         const prodPriceMain = (await PAGES.categoriesPage.itemsPrices.getTextOfFirstElem(page)).match("\d");
         await PAGES.categoriesPage.itemsTitles.clickOnFirstElem(page);
         const prodPriceOnPage = (await PAGES.productPage.prodPrice.getText(page)).match("\d");

@@ -1,5 +1,5 @@
 import {test} from "@playwright/test";
-import {PAGES} from "../pages/pages";
+import {PAGES} from "../../core/pages/pages";
 
 export class SiteElement {
 
@@ -22,7 +22,7 @@ export class SiteElement {
     }
 
     async fillField(page, value){
-        await test.step(`Fill field "${this.elementName}" at "${this.pageName}"`, async ()=>{
+        await test.step(`Fill "${value}" into field "${this.elementName}" at "${this.pageName}"`, async ()=>{
             await page.locator(this.elemLocator).fill(value);
         })
     }

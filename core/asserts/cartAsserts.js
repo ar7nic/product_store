@@ -14,12 +14,12 @@ export class CartAsserts {
             await expect(await PAGES.cartPage.itemPrice(prodName).getText(page)).to.equal(prodPrice);
         })
     }
-    async totalPriceIsLessAfterDeletingItem(page, success){
+    async totalPriceIsLessAfterDeletingItem(page, totalPrice){
+        const success = (await PAGES.cartPage.totalPrice.getText(page)) < totalPrice;
         await test.step(`ASSERT Total Price is less after deleting the product from the cart`, async ()=>{
             await expect(success).to.be.true;
         })
     }
-
 
 
 //     await expect(prodForCart.prodName).toEqual(

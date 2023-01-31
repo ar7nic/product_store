@@ -1,9 +1,10 @@
-import {URLS} from "../const/baseConst";
-import {PAGES} from "../pages/pages";
-import {ASSISTANTS} from "../assistants/assistants";
-import {USERS} from "../models/users";
-import {APIUTILS} from "../utils/ApiUtils";
-import {ASSERTS} from "../asserts/asserts";
+import {URLS} from "../core/const/baseConst";
+import {PAGES} from "../core/pages/pages";
+import {ASSISTANTS} from "../core/assistants/assistants";
+import {USERS} from "../core/models/users";
+import {APIUTILS} from "../core/api/buyerApi";
+import {ASSERTS} from "../core/asserts/asserts";
+import {REPORTER} from "../utils/reporter/reporterAdapter";
 const { test, expect } = require('@playwright/test');
 let page;
 let loginPayload = {username: "ar7nic", password: "c3RvcmVQYXNzd29yZA=="};
@@ -34,9 +35,10 @@ test.beforeEach(async ({request}) => {
 });
 
 test.describe('place order tests', ()=>{
-    test('placing order',async ()=>{
+    REPORTER.it('placing order',async ()=>{
 
         await test.step('Open the cart', async () => {
+            // await
             await page.waitForTimeout(2000);
             await PAGES.mainMenu.cartMenu.clickElem(page);
             await page.waitForTimeout(2000);
@@ -63,7 +65,7 @@ test.describe('place order tests', ()=>{
 
     })
 
-    test('placing the order without credentials', async ()=>{
+    REPORTER.it('placing the order without credentials', async ()=>{
         await test.step('Open the cart', async ()=> {
             await PAGES.mainMenu.cartMenu.clickElem(page);
             await PAGES.cartPage.totalPrice.waitForElem(page);

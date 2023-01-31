@@ -1,6 +1,8 @@
-import {URLS} from "../const/baseConst";
-import {PAGES} from "../pages/pages";
-import {ASSERTS} from "../asserts/asserts";
+import {URLS} from "../core/const/baseConst";
+import {PAGES} from "../core/pages/pages";
+import {ASSERTS} from "../core/asserts/asserts";
+import {ENGINEASSISTANT} from "../utils/engine/EngineAssistant";
+import {REPORTER} from "../utils/reporter/reporterAdapter";
 
 const { test, expect } = require('@playwright/test');
 
@@ -9,15 +11,16 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('about-us tests', ()=>{
-    test('about-video is presents',async ({page})=>{
+    REPORTER.it('about-video is presents',async ({page})=>{
         await PAGES.mainMenu.aboutUsMenu.clickElem(page);
         await ASSERTS.aboutAsserts.videoIsPresent(page,'src');
 
     })
-    test('about-us pop-up is closable',async ({page})=>{
+    REPORTER.it('about-us pop-up is closable',async ({page})=>{
         await PAGES.mainMenu.aboutUsMenu.clickElem(page);
         await PAGES.aboutPage.modalCloseButton.clickElem(page);
-        await page.waitForTimeout(2000);
+        await ENGINEASSISTANT.waitTimeout(page,2000);
+        // await page.waitForTimeout(2000);
         await ASSERTS.aboutAsserts.videoPopupWindowIsClosable(page);
 
     })

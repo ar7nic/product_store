@@ -5,11 +5,8 @@ const productId = uuidv4();
 let token;
 let requestPayload;
 
-class ApiUtils {
+class BuyerApi {
 
-
-    constructor() {
-    }
     async getToken(request,loginPayload) {
         const loginResponse = await request.post(URLS.loginAPIUrl,{
             data:loginPayload
@@ -30,4 +27,4 @@ class ApiUtils {
     }
 }
 
-export const APIUTILS = new ApiUtils();
+export const APIUTILS = new BuyerApi();

@@ -1,4 +1,4 @@
-import {SiteElement} from "../utils/SiteElement";
+import {SiteElement} from "../../utils/elements/SiteElement";
 
 const pageName = 'Order Pop-up'
 export class OrderPopup {

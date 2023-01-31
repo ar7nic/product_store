@@ -1,6 +1,6 @@
 import {ASSISTANTS} from "../assistants/assistants";
 import {PAGES} from "../pages/pages";
-import {SiteElement} from "../utils/SiteElement";
+import {SiteElement} from "../../utils/elements/SiteElement";
 const { test } = require('@playwright/test');
 const {expect} = require('chai')
 
