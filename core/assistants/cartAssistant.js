@@ -11,8 +11,6 @@ export class CartAssistant {
     let prodPrice;
     let msg;
     await ENGINEASSISTANT.waitForNetworkIdle(page);
-    // await page.waitForLoadState("networkidle");
-
     await REPORTER.testStep ('Click on the first product on page', async ()=> {
       await PAGES.categoriesPage.itemsTitles.clickOnFirstElem(page);
     })
@@ -28,25 +26,8 @@ export class CartAssistant {
     msg = await ASSISTANTS.popupAssistant.popUpAccept(page)
     ])
     await ENGINEASSISTANT.waitTimeout(page,2000);
-    // await page.waitForTimeout(2000);
     return { prodName, prodPrice ,msg};
   }
-
-  // async findItemsInCart(page, prodName) {
-  //   const itemsInCart = await PAGES.cartPage.cartItems.getItems(page);
-  //   const prodCount = await itemsInCart.count();
-  //   for (let i = 0; i < prodCount + 1; ++i) {
-  //     if (
-  //       (await itemsInCart
-  //         .nth(i)
-  //         .locator(PAGES.cartPage.itemTitlePath.elemLocator) // TODO figure out
-  //         .textContent()) === prodName
-  //     ) {
-  //       return itemsInCart.nth(i);
-  //     }
-  //   }
-  // }
-
 
 
   async deleteItemFromCart(page, prodName) {
@@ -54,8 +35,6 @@ export class CartAssistant {
     await PAGES.cartPage.itemDelBtn(prodName).clickElem(page);
     await ENGINEASSISTANT.waitForNetworkIdle(page);
     await ENGINEASSISTANT.waitTimeout(page,2000);
-    // await page.waitForLoadState('networkidle');
-    // await page.waitForTimeout(2000);
 
   }
 }

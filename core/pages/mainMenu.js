@@ -8,11 +8,4 @@ export class MainMenu {
     cartMenu = new SiteElement('Cart Menu', pageName,"//a[@id='cartur']");
     welcomeMenu = new SiteElement('User account Menu',pageName,"//a[@id='nameofuser']");
 
-    // contactMenu = "//a[@data-target='#exampleModal']";
-    // loginMenu = "//a[@id='login2']";
-    //
-    // signInMenu = "//a[@id='signin2']";
-    // aboutUsMenu = "//a[contains(text(),'About us')]";
-    // cartMenu = "//a[@id='cartur']";
-    // welcomeMenu = "//a[@id='nameofuser']";
 }

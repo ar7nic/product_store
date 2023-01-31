@@ -20,7 +20,6 @@ test.describe('about-us tests', ()=>{
         await PAGES.mainMenu.aboutUsMenu.clickElem(page);
         await PAGES.aboutPage.modalCloseButton.clickElem(page);
         await ENGINEASSISTANT.waitTimeout(page,2000);
-        // await page.waitForTimeout(2000);
         await ASSERTS.aboutAsserts.videoPopupWindowIsClosable(page);
 
     })

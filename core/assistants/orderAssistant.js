@@ -1,6 +1,7 @@
 import { PAGES } from "../pages/pages";
 import {test} from "@playwright/test";
 import {REPORTER} from "../../utils/reporter/reporterAdapter";
+import {ENGINEASSISTANT} from "../../utils/engine/EngineAssistant";
 
 export class OrderAssistant {
   async placeTheOrder(page,user) {
@@ -22,7 +23,8 @@ export class OrderAssistant {
       await PAGES.orderPopup.purchaseBtn.clickElem(page);
 
     })
-    await page.waitForTimeout(1000);
+    await ENGINEASSISTANT.waitTimeout(page,1000);
+
   }
 
   async placeTheOrderWithMissingData(page, user) {

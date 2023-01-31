@@ -7,8 +7,5 @@ export class SignInPopUp {
     signUpButton = new SiteElement('Sign-in button',pageName,"//button[contains(text(),'Sign up')]");
     signInModal = new SiteElement('Sign-in pop-up',pageName,"//div[@id='signInModal']")
 
-    // signInUserNameInput = "//input[@id='sign-username']";
-    // signInPasswordInput = "//input[@id='sign-password']"
-    // signUpButton = "//button[contains(text(),'Sign up')]";
 
 }

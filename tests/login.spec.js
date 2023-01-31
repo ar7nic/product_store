@@ -33,9 +33,7 @@ test.describe('login tests', ()=>{
     REPORTER.it('can successfully login into account', async ({page})=>{
         await ASSISTANTS.loginAssistant.loginToSite(page,USERS.testUser.userName,USERS.testUser.userPassword);
         await ENGINEASSISTANT.waitForNetworkIdle(page);
-        // await page.waitForLoadState('networkidle');
         await ENGINEASSISTANT.waitTimeout(page,2000);
-        // await page.waitForTimeout(2000);
         const welcomeText = await PAGES.mainMenu.welcomeMenu.getText(page);
         await ASSERTS.authAsserts.expectUserMenuIsVisible(page,'Welcome '+ USERS.testUser.userName);
 

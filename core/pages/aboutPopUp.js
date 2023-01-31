@@ -6,10 +6,5 @@ export class AboutPopUp {
    modalCloseButton = new SiteElement('Close button',pageName,"//div[@id='videoModal']//div[@class='modal-footer']/button");
    modalWindow = new SiteElement('Video window',pageName,"//div[@id='videoModal']");
 
-   // modalVideo = "//div[@id='videoModal'][@style='display: block;']//video";
-   // modalCloseButton = "//div[@id='videoModal']//div[@class='modal-footer']/button";
-   // modalWindow = "//div[@id='videoModal']";
-
-
 
 }
