@@ -6,6 +6,7 @@ import {USERS} from "../core/models/users";
 import {ASSERTS} from "../core/asserts/asserts";
 import {REPORTER} from "../utils/reporter/reporterAdapter"
 import {ENGINEASSISTANT} from "../utils/engine/EngineAssistant";
+import {RUNNER} from "../utils/test-runner/testRunner";
 
 const {test, expect} = require("@playwright/test");
 
@@ -14,9 +15,9 @@ test.beforeEach(async ({ page }) => {
     await page.goto(URLS.siteUrl);
 });
 
-test.describe('login tests', ()=>{
+RUNNER.describe('login tests', ()=>{
 
-    REPORTER.it('login with wrong user name', async ({page})=>{
+    RUNNER.it('login with wrong user name', async ({page})=>{
 
         await ASSISTANTS.loginAssistant.loginToSite(page,MyUtils.randomString(),USERS.testUser.userPassword);
         await ASSERTS.popUpAsserts.expectAlertWithText(page,'User does not exist.');
@@ -24,13 +25,13 @@ test.describe('login tests', ()=>{
 
     })
 
-    REPORTER.it('login with wrong password', async ({page})=>{
+    RUNNER.it('login with wrong password', async ({page})=>{
         await ASSISTANTS.loginAssistant.loginToSite(page,USERS.testUser.userName,MyUtils.randomString());
         await ASSERTS.popUpAsserts.expectAlertWithText(page,'Wrong password.');
         await ASSERTS.authAsserts.expectLoginPopupIsVisible(page);
     })
 
-    REPORTER.it('can successfully login into account', async ({page})=>{
+    RUNNER.it('can successfully login into account', async ({page})=>{
         await ASSISTANTS.loginAssistant.loginToSite(page,USERS.testUser.userName,USERS.testUser.userPassword);
         await ENGINEASSISTANT.waitForNetworkIdle(page);
         await ENGINEASSISTANT.waitTimeout(page,2000);

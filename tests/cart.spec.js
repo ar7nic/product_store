@@ -3,13 +3,14 @@ import {PAGES} from "../core/pages/pages";
 import {ASSISTANTS} from "../core/assistants/assistants";
 import {ASSERTS} from "../core/asserts/asserts";
 import {REPORTER} from "../utils/reporter/reporterAdapter";
+import {RUNNER} from "../utils/test-runner/testRunner";
 const { test, expect } = require('@playwright/test');
 test.beforeEach(async ({ page }) => {
     await page.goto(URLS.siteUrl);
 });
 
-test.describe('cart-tests', ()=>{
-    REPORTER.it('adding items to cart',async ({page})=>{
+RUNNER.describe('cart-tests', ()=>{
+    RUNNER.it('adding items to cart',async ({page})=>{
 
         const prodForCart = await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
         await PAGES.mainMenu.cartMenu.clickElem(page);
@@ -20,7 +21,7 @@ test.describe('cart-tests', ()=>{
 
     })
 
-    REPORTER.it('deleting item from cart',async ({page})=>{
+    RUNNER.it('deleting item from cart',async ({page})=>{
 
         const prodForCart = await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
         await PAGES.mainMenu.cartMenu.clickElem(page);

@@ -6,6 +6,7 @@ import {APIUTILS} from "../core/api/buyerApi";
 import {ASSERTS} from "../core/asserts/asserts";
 import {REPORTER} from "../utils/reporter/reporterAdapter";
 import {ENGINEASSISTANT} from "../utils/engine/EngineAssistant";
+import {RUNNER} from "../utils/test-runner/testRunner";
 const { test, expect } = require('@playwright/test');
 let page;
 let loginPayload = {username: "ar7nic", password: "c3RvcmVQYXNzd29yZA=="};
@@ -24,8 +25,8 @@ test.beforeEach(async ({request}) => {
     await page.goto(URLS.siteUrl);
 });
 
-test.describe('place order tests', ()=>{
-    test.only('placing order',async ()=>{
+RUNNER.describe('place order tests', ()=>{
+    RUNNER.it('placing order',async ()=>{
 
         await REPORTER.testStep('Open the cart', async () => {
             await PAGES.mainMenu.cartMenu.clickElem(page);
@@ -54,7 +55,7 @@ test.describe('place order tests', ()=>{
 
     })
 
-    REPORTER.it('placing the order without credentials', async ()=>{
+    RUNNER.it('placing the order without credentials', async ()=>{
         await REPORTER.testStep('Open the cart', async ()=> {
             await PAGES.mainMenu.cartMenu.clickElem(page);
             await PAGES.cartPage.totalPrice.waitForElem(page);
