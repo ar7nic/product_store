@@ -1,14 +1,16 @@
-import {URLS} from "../const/baseConst";
-import {PAGES} from "../pages/pages";
-import {ASSISTANTS} from "../assistants/assistants";
-import {ASSERTS} from "../asserts/asserts";
+import {URLS} from "../core/const/baseConst";
+import {PAGES} from "../core/pages/pages";
+import {ASSISTANTS} from "../core/assistants/assistants";
+import {ASSERTS} from "../core/asserts/asserts";
+import {REPORTER} from "../utils/reporter/reporterAdapter";
+import {RUNNER} from "../utils/test-runner/testRunner";
 const { test, expect } = require('@playwright/test');
 test.beforeEach(async ({ page }) => {
     await page.goto(URLS.siteUrl);
 });
 
-test.describe('cart-tests', ()=>{
-    test('adding items to cart',async ({page})=>{
+RUNNER.describe('cart-tests', ()=>{
+    RUNNER.it('adding items to cart',async ({page})=>{
 
         const prodForCart = await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
         await PAGES.mainMenu.cartMenu.clickElem(page);
@@ -19,17 +21,14 @@ test.describe('cart-tests', ()=>{
 
     })
 
-     test('deleting item from cart',async ({page})=>{
+    RUNNER.it('deleting item from cart',async ({page})=>{
 
         const prodForCart = await ASSISTANTS.cartAssistant.addToCartFirstItem(page);
         await PAGES.mainMenu.cartMenu.clickElem(page);
         await PAGES.cartPage.cartItems.waitForElem(page);
         const totalPrice = await PAGES.cartPage.totalPrice.getText(page);
         await ASSISTANTS.cartAssistant.deleteItemFromCart(page, prodForCart.prodName);
-        const delSuccess = (
-            await PAGES.cartPage.totalPrice.getText(page) //TODO calculations transfer to Asserts or there
-        ) < totalPrice;
-        await ASSERTS.cartAsserts.totalPriceIsLessAfterDeletingItem(page,delSuccess);
+        await ASSERTS.cartAsserts.totalPriceIsLessAfterDeletingItem(page,totalPrice);
 
     })
 })
