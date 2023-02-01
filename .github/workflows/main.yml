@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  APP_BRANCH: github.ref_name
+  APP_BRANCH: main
   
 jobs:
   product_store:
@@ -15,7 +15,7 @@ jobs:
       max-parallel: 4
       matrix:
         node_version: ['16', '18']
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
         with:
