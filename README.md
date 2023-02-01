@@ -50,7 +50,8 @@ yarn allure-report
 - product_store
     - `/tests/*` : E2E tests
 - product_store/utils
-    - `/element` : Wrapper class for HTML element (includes all methods to work with HTML element)
+    - `/elements` : Wrapper class for HTML element (includes all methods to work with HTML element)
     - `/engine` : Wrapper class for browser object (includes all methods to work with browser like `waitForTimeout, waitForLoadState`)
     - `/misc` : Includes methods to get random values
     - `/reporter` : Wrapper class for HTML reporter
+    - `/test_runner` : Wrapper class for `Playwright` test runner

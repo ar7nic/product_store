@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{evv.APP_BRANCH}}
+          ref: ${{env.APP_BRANCH}}
       - uses: actions/setup-node@v3
         with: 
           node-version: ${{ matrix.node_version }}
