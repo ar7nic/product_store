@@ -18,10 +18,10 @@ RUNNER.describe('product items tests', ()=>{
 
     })
 
-    RUNNER.it('product price is the same in main and product pages',async ({page})=>{
-        const prodPriceMain = (await PAGES.categoriesPage.itemsPrices.getTextOfFirstElem(page)).match("\d");
+    test.only('product price is the same in main and product pages',async ({page})=>{
+        const prodPriceMain = (await PAGES.categoriesPage.itemsPrices.getTextOfFirstElem(page)).match(/\d+/)[0];
         await PAGES.categoriesPage.itemsTitles.clickOnFirstElem(page);
-        const prodPriceOnPage = (await PAGES.productPage.prodPrice.getText(page)).match("\d");
+        const prodPriceOnPage = (await PAGES.productPage.prodPrice.getText(page)).match(/\d+/)[0];
         await ASSERTS.productAsserts.prodPriceIsSameOnMainAndProdPages(page,prodPriceOnPage,prodPriceMain);
 
     })
