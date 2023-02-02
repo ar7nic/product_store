@@ -6,3 +6,10 @@ node_modules/
 /allure-report/
 /allure-results/
 
+
+.env*
+/.idea
+/node_modules
+/.github
+/temp
+/gh-pages
