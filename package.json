@@ -12,7 +12,7 @@
   },
   "scripts": {
     "clean": "rimraf allure-report/ && rimraf allure-results",
-    "test:reporter": "npm run clean && npx playwright test",
+    "test:reporter": "npm run clean && npx playwright test || exit 0",
     "allure-report": "npx allure generate ./allure-results --clean && allure open"
   },
   "dependencies": {

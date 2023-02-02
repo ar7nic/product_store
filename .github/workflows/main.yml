@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  APP_BRANCH: main
+  APP_BRANCH: ${{github.ref_name}}
   
 jobs:
   product_store:
@@ -36,14 +36,14 @@ jobs:
         
       - name: Upload allure results artifacts
         uses: actions/upload-artifact@v3
-        if: ${{ always() }}
+        if: always()
         with:
           name: artifact-results
           path: allure-results
           if-no-files-found: error
           retention-days: 1
           
-        
+      - name:
         
           
         
