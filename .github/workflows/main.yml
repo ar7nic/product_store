@@ -44,7 +44,7 @@ jobs:
           retention-days: 1
 
   Deploy report:
-    runs_on: ubuntu-latest
+    runs_on: [ubuntu-latest]
     needs: [product_store]
     permissions:
       contents: write
