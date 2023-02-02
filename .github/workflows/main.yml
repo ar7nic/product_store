@@ -40,6 +40,7 @@ jobs:
         with:
           name: artifact-results
           path: allure-results
+          if-no-files-found: error
           retention-days: 1
           
         
