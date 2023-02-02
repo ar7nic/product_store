@@ -42,7 +42,7 @@ jobs:
         run: npx playwright install --with-deps "${{env.BROWSER}}"
         
       - name: Run tests
-        run: yarn test:reporter
+        run: yarn test-"${{env.BROWSER}}"
         
       - name: Upload allure results artifacts
         uses: actions/upload-artifact@v3

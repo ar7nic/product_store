@@ -55,13 +55,12 @@ const config = {
       },
     },
 
-//     {
-//       name: 'firefox',
-//       use: {
-//         ...devices['Desktop Firefox'],
-//         headless: true,
-//       },
-//     },
+    {
+      name: 'firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+      },
+    },
 
 //     {
 //       name: 'webkit',
