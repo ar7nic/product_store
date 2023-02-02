@@ -29,7 +29,7 @@ jobs:
         run: yarn install --frozen-lockfile
       
       - name: Install playwright dependencies
-        run: npx playwright install
+        run: npx playwright install --with-deps chromium
         
       - name: Run tests
         run: yarn test:reporter
