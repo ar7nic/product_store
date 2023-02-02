@@ -4,7 +4,7 @@ on:
   - cron: "0 2 * * 6"
   workflow_dispatch:
     inputs:
-      test_briwser:
+      test_browser:
         description: 'browser'
         required: true
         default: 'chromium'
@@ -14,8 +14,8 @@ on:
           - firefox
 
 env:
-  APP_BRANCH: ${{github.ref_name}}
-  BROWSER: ${{github.event.inputs == 'firefox' ?? 'firefox' || 'chromium' }}
+  APP_BRANCH: "${{github.ref_name}}"
+  BROWSER: "${{github.event.inputs.test_browser == 'firefox' ?? 'firefox' || 'chromium' }}"
   
 jobs:
   product_store:
