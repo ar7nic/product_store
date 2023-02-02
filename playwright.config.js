@@ -48,35 +48,35 @@ const config = {
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'chromium',
-      use: {
-        ...devices['Desktop Chrome'],
-      },
-    },
+//     {
+//       name: 'chromium',
+//       use: {
+//         ...devices['Desktop Chrome'],
+//       },
+//     },
 
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-        headless: true,
-      },
-    },
+//     {
+//       name: 'firefox',
+//       use: {
+//         ...devices['Desktop Firefox'],
+//         headless: true,
+//       },
+//     },
 
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-    },
+//     {
+//       name: 'webkit',
+//       use: {
+//         ...devices['Desktop Safari'],
+//       },
+//     },
     //
     // /* Test against mobile viewports. */
-    {
-      name: 'Mobile Chrome',
-      use: {
-        ...devices['Pixel 5'],
-      },
-    },
+//     {
+//       name: 'Mobile Chrome',
+//       use: {
+//         ...devices['Pixel 5'],
+//       },
+//     },
     // {
     //   name: 'Mobile Safari',
     //   use: {
@@ -91,12 +91,12 @@ const config = {
     //     channel: 'msedge',
     //   },
     // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: {
-    //     channel: 'chrome',
-    //   },
-    // },
+    {
+      name: 'Google Chrome',
+      use: {
+        channel: 'chrome',
+      },
+    },
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
