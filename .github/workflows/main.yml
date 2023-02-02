@@ -43,8 +43,8 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-  Deploy report:
-    runs-on: [ubuntu-latest]
+  deploy_report:
+    runs-on: ubuntu-latest
     needs: [product_store]
     permissions:
       contents: write
