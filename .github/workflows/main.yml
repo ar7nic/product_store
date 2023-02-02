@@ -4,13 +4,14 @@ on:
   - cron: "0 2 * * 6"
   workflow_dispatch:
     inputs:
-      description: Browser
-      required: true
-      default: chromium
-      type: choice
-      options:
-        - chromium
-        - firefox
+      test_briwser:
+        description: 'browser'
+        required: true
+        default: 'chromium'
+        type: choice
+        options:
+          - chromium
+          - firefox
 
 env:
   APP_BRANCH: ${{github.ref_name}}
