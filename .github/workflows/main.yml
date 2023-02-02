@@ -36,6 +36,7 @@ jobs:
         
       - name: Upload allure results artifacts
         uses: actions/upload-artifact@v3
+        if: ${{ always() }}
         with:
           name: artifact-results
           path: allure-results
