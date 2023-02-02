@@ -3,9 +3,18 @@ on:
   schedule:
   - cron: "0 2 * * 6"
   workflow_dispatch:
+    inputs:
+      description: Browser
+      required: true
+      default: chromium
+      type: choice
+      options:
+        - chromium
+        - firefox
 
 env:
   APP_BRANCH: ${{github.ref_name}}
+  BROWSER: ${{github.event.inputs == firefox ?? firefox || chromium }}
   
 jobs:
   product_store:
