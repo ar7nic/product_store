@@ -101,5 +101,7 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}  
-          
+          message: |
+            The new report was generated:
+            https://ar7nic.github.io/product_store/${{github.run_number}}/
         
