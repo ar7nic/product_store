@@ -15,7 +15,7 @@ on:
 
 env:
   APP_BRANCH: "${{github.ref_name}}"
-  BROWSER: "${{github.event.inputs.test_browser == 'firefox' && 'firefox' || 'chromium' }}"
+  BROWSER: "${{github.event.inputs.test_browser}}"
   
 jobs:
   product_store:
@@ -91,6 +91,14 @@ jobs:
           publish_dir: ./
           keep_files: true
 
+  notify:
+    runs-on: ubuntu-latest
+    needs: [deploy_report]
+    steps:
+    - name: Google Chat Notification
+      uses: CommonMarvel/google-chat-notification@v1.1.1
+      with:
+        url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
         
           
         
