@@ -97,7 +97,7 @@ jobs:
     needs: [deploy_report]
     steps:
       - name: send message to chat
-        run: curl -X POST https://chat.googleapis.com/v1/spaces/AAAAe9OG1Dc/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=wVqlEyN9xa9JlZUgKhFnTD9da3G_LJgtCVWs8qj2TBU%3D https://ar7nic.github.io/product_store/${{github.run_number}}/ 
+        run: curl -X POST https://chat.googleapis.com/v1/spaces/AAAAe9OG1Dc/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=wVqlEyN9xa9JlZUgKhFnTD9da3G_LJgtCVWs8qj2TBU%3D -d 'https://ar7nic.github.io/product_store/${{github.run_number}}/' 
             
 
         
