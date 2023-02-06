@@ -97,7 +97,7 @@ jobs:
     needs: [deploy_report]
     steps:
       - name: Wait for gh-pages
-        run: sleep 2m
+        run: sleep 1m
         
       - name: send message to chat
         run: >-
