@@ -26,7 +26,7 @@ jobs:
       matrix:
         node_version: ['18']
         os: [ubuntu-latest]
-        browser: ${{env.BROWSER}}
+        browser: "${{env.BROWSER}}"
     steps:
       - uses: actions/checkout@v3
         with:
