@@ -19,14 +19,14 @@ env:
   
 jobs:
   product_store:
-    name: Test on node ${{ matrix.node_version }} with ${{ matrix.os }} and ${{matrix.browser}} browser
+    name: Test on node ${{ matrix.node_version }} with ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       max-parallel: 4
       matrix:
         node_version: ['18']
         os: [ubuntu-latest]
-        browser: [${env.BROWSER}]
+
     steps:
       - uses: actions/checkout@v3
         with:
