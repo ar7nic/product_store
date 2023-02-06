@@ -97,12 +97,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [deploy_report]
     steps:
-      - name: send default message
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}  
-          message: |
-            The new report was generated:
-            https://ar7nic.github.io/product_store/${{github.run_number}}/
+      - name: Wait for gh-pages
+        run: sleep 1m
+        
+      - name: send message to chat
+        run: >-
+          curl --location --request POST 
+          --header 'Content-Type:application/json' 
+          --data-raw '{"text":"The new report was generated. https://ar7nic.github.io/product_store/${{github.run_number}}/"}'
+          'https://chat.googleapis.com/v1/spaces/AAAAe9OG1Dc/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=wVqlEyN9xa9JlZUgKhFnTD9da3G_LJgtCVWs8qj2TBU%3D' 
         
