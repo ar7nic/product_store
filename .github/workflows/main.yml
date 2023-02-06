@@ -22,10 +22,10 @@ jobs:
     name: Test on node ${{ matrix.node_version }} with ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
-      max-parallel: 4
+      max-parallel: 2
       matrix:
         node_version: ['18']
-        os: [ubuntu-latest]
+        os: [ubuntu-20.04]
 
     steps:
       - uses: actions/checkout@v3
@@ -55,7 +55,7 @@ jobs:
           retention-days: 1
 
   deploy_report:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: [product_store]
     permissions:
       contents: write
@@ -63,7 +63,7 @@ jobs:
       - name: Get History
         uses: actions/checkout@v3
         if: always()
-        continue-on-error: true
+        continue-on-error: false
         with:
           ref: gh-pages
           path: gh-pages
@@ -93,14 +93,14 @@ jobs:
           keep_files: true
 
   notify:
-    name: Notify to telegram
-    runs-on: ubuntu-latest
+    name: Notify to Google Chat
+    runs-on: ubuntu-20.04
     needs: [deploy_report]
     steps:
       - name: Wait for gh-pages
         run: sleep 1m
         
-      - name: send message to chat
+      - name: Send message to chat
         run: >-
           curl --location --request POST 
           --header 'Content-Type:application/json' 
