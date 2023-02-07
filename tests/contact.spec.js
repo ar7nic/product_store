@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
 
 RUNNER.describe('Send message', ()=>{
 
-    test.only('Send message with filled user info', async({page})=>{
+    RUNNER.it('Send message with filled user info', async({page})=>{
         const msg = await ASSISTANTS.contactAssistant.sendMessage(page,USERS.testUser,'Hello');
         //await ASSERTS.popUpAsserts.expectTextEqualTo(msg,'Thanks for the message!!');
         await ASSERTS.contactAsserts.expectContactPopupNotVisible(page);
