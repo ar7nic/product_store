@@ -12,7 +12,7 @@ export class PaginationAsserts {
 
     async elementsOnFirstPageAreSame(page,firstPageBefore,firstPageAfter){
         await REPORTER.testStep('The list of elements on the first page is the same after pagination', async()=>{
-            await expect(firstPageAfter).not.equal(firstPageBefore);
+            await expect(firstPageAfter).equal(firstPageBefore);
         })
     }
 }

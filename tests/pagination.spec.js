@@ -21,7 +21,7 @@ RUNNER.describe('pagination tests', ()=>{
         await ASSERTS.paginationAsserts.elementsOnSecondPageAreDiff(page,elementsOnFirst,elementsOnSecond);
 
     })
-    RUNNER.it('elements on the first page are the same after paging',async ({page})=>{
+    test.only('elements on the first page are the same after paging',async ({page})=>{
         await ENGINEASSISTANT.waitForNetworkIdle(page);
         const elementsOnFirst = await PAGES.paginationPage.itemCardTitle.getAllText(page);
         await PAGES.paginationPage.nextButton.clickElem(page);
