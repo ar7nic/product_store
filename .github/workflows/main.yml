@@ -12,10 +12,11 @@ on:
         options:
           - chromium
           - firefox
+          - all
 
 env:
   APP_BRANCH: "${{github.ref_name}}"
-  BROWSER: "${{github.event.inputs.test_browser}}"
+  BROWSER: "${{github.event.inputs.test_browser}} == 'all' && '' || ${{github.event.inputs.test_browser}} == 'firefox' && 'firefox' || 'chromium'"
   
 jobs:
   product_store:
