@@ -8,7 +8,7 @@ let requestPayload;
 class BuyerApi {
 
     async getToken(request,user) {
-        const loginPayload = {username: user.username, password: user.hashPassword};
+        const loginPayload = {username: user.userName, password: user.hashPassword};
         const loginResponse = await request.post(URLS.loginAPIUrl,{
             data:loginPayload
         });
