@@ -44,7 +44,7 @@ jobs:
         run: npx playwright install --with-deps
         
       - name: Run tests all
-        if: ${{env.BROWSER}}== 'all'
+        if: ${{env.BROWSER == 'all'}}
         run: yarn test-all
 
       - name: Run tests on browser
