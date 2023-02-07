@@ -13,7 +13,7 @@
   "scripts": {
     "clean": "rimraf allure-results",
     "test:reporter": "npm run clean && npx playwright test || exit 0",
-    "test-": "npx playwright test || exit 0",
+    "test-all": "npx playwright test || exit 0",
     "test-chromium": "npx playwright test --project=chromium || exit 0",
     "test-firefox": "npx playwright test --project=firefox || exit 0",
     "allure-report": "npx allure generate --clean && allure open"

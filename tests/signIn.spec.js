@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
     await page.goto(URLS.siteUrl);
 });
 
-test.describe('sign in tests', ()=>{
+RUNNER.describe('sign in tests', ()=>{
 
     RUNNER.it('sign in with existing user', async({page})=>{
 

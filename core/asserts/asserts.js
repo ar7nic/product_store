@@ -6,6 +6,7 @@ import {OrderAsserts} from "./orderAsserts";
 import {PaginationAsserts} from "./paginationAsserts";
 import {ProductAsserts} from "./productAsserts";
 import {PopUpAsserts} from "./popUpAsserts";
+import {ContactAsserts} from "./contactAsserts";
 
 export const ASSERTS = {
     authAsserts : new AuthAsserts(),
@@ -16,4 +17,5 @@ export const ASSERTS = {
     paginationAsserts : new PaginationAsserts(),
     productAsserts : new ProductAsserts(),
     popUpAsserts : new PopUpAsserts(),
+    contactAsserts : new ContactAsserts()
 }

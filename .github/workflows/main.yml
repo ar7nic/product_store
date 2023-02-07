@@ -16,7 +16,7 @@ on:
 
 env:
   APP_BRANCH: "${{github.ref_name}}"
-  BROWSER: "${{github.event.inputs.test_browser}} == 'all' && '' || ${{github.event.inputs.test_browser}} == 'firefox' && 'firefox' || 'chromium'"
+  BROWSER: "${{github.event.inputs.test_browser}}"
   
 jobs:
   product_store:
@@ -41,10 +41,19 @@ jobs:
         run: yarn install --frozen-lockfile
       
       - name: Install playwright dependencies
-        run: npx playwright install --with-deps "${{env.BROWSER}}"
+        run: npx playwright install --with-deps
         
-      - name: Run tests
-        run: yarn test-"${{env.BROWSER}}"
+      - name: Run tests all
+        if: ${{env.BROWSER}}== 'all'
+        steps:
+          - name: Test with all browsers
+            run: yarn test-all
+
+      - name: Run tests on browser
+        if: ${{ env.BROWSER == 'chromium' || env.BROWSER == 'firefox' }}
+        steps:
+          - name: Test with the browser
+            run: yarn test-${{env.BROWSER}}
         
       - name: Upload allure results artifacts
         uses: actions/upload-artifact@v3

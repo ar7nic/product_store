@@ -3,6 +3,7 @@ import { CartAssistant } from "./cartAssistant";
 import { OrderAssistant } from "./orderAssistant";
 import { PopupAssistant } from "./popupAssistant";
 import { SignInAssistant } from "./signInAssistant";
+import {ContactAssistant} from "./contactAssistant";
 
 
 export const ASSISTANTS = {
@@ -11,4 +12,5 @@ export const ASSISTANTS = {
   orderAssistant: new OrderAssistant(),
   popupAssistant: new PopupAssistant(),
   signInAssistant: new SignInAssistant(),
+  contactAssistant: new ContactAssistant()
 };

@@ -9,12 +9,12 @@ import {ENGINEASSISTANT} from "../utils/engine/EngineAssistant";
 import {RUNNER} from "../utils/test-runner/testRunner";
 const { test, expect } = require('@playwright/test');
 let page;
-let loginPayload = {username: "ar7nic", password: "c3RvcmVQYXNzd29yZA=="};
+//let loginPayload = {username: "ar7nic", password: "c3RvcmVQYXNzd29yZA=="};
 
 test.beforeAll(async({browser,request})=>{
 
     const context = await browser.newContext();
-    await APIUTILS.getToken(request,loginPayload); // new
+    await APIUTILS.getToken(request,USERS.testUser); // new
     await APIUTILS.setTokenToCookies(context); //new
     page = await context.newPage();
 
