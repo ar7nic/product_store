@@ -17,8 +17,8 @@ on:
 env:
   APP_BRANCH: "${{github.ref_name}}"
   BROWSER: "${{github.event.inputs.test_browser}}"
-  NODE_VERSION: "['18','16']"
-  OS: "[ubuntu-20.04]"
+  NODE_VERSION: ['18','16']
+  OS: [ubuntu-20.04]
   
 jobs:
   product_store:
