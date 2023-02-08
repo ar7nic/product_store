@@ -69,7 +69,7 @@ jobs:
       - name: Get History
         uses: actions/checkout@v3
         if: always()
-        continue-on-error: false
+        continue-on-error: true
         with:
           ref: gh-pages
           path: gh-pages
@@ -80,7 +80,9 @@ jobs:
           name: artifact-results
           path: allure-results
 
-      - run: echo BROWSER=${{env.BROWSER}} > allure-results/environment.properties
+      - name: Add environment info to report
+        run: echo -e BROWSER=${{env.BROWSER}}\nNODE_VERSION=${{ matrix.node_version }}\nOS=${{ matrix.os }} > allure-results/environment.properties
+
 
       - name: Generate report
         uses: simple-elf/allure-report-action@master
@@ -106,7 +108,7 @@ jobs:
     needs: [deploy_report]
     steps:
       - name: Wait for gh-pages
-        run: sleep 1m
+        run: sleep 2m
         
       - name: Send message to chat
         run: >-
