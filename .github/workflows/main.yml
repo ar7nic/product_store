@@ -17,6 +17,8 @@ on:
 env:
   APP_BRANCH: "${{github.ref_name}}"
   BROWSER: "${{github.event.inputs.test_browser}}"
+  NODE_VERSION: "['18','16']"
+  OS: "[ubuntu-20.04]"
   
 jobs:
   product_store:
@@ -25,8 +27,8 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        node_version: ['18']
-        os: [ubuntu-20.04]
+        node_version: ${{env.NODE_VERSION}}
+        os: ${{env.OS}}
 
     steps:
       - uses: actions/checkout@v3
@@ -81,7 +83,7 @@ jobs:
           path: allure-results
 
       - name: Add environment info to report
-        run: echo -e BROWSER=${{env.BROWSER}}\nNODE_VERSION=${{ matrix.node_version }}\nOS=${{ matrix.os }} > allure-results/environment.properties
+        run: echo -en BROWSER=${{env.BROWSER}}\nNODE_VERSION=${{matrix.node_version}}\nOS=${{matrix.os}} > allure-results/environment.properties
 
 
       - name: Generate report
