@@ -83,8 +83,9 @@ jobs:
           path: allure-results
 
       - name: Add environment info to report
-        run: echo -e BROWSER=${{env.BROWSER}} \nNODE_VERSION=${{env.NODE_VERSION}} \nOS=${{env.OS}} > allure-results/environment.properties
-
+        run: echo BROWSER=${{env.BROWSER}} > allure-results/environment.properties
+             echo NODE_VERSION=${{env.NODE_VERSION}} >> allure-results/environment.properties
+             echo OS=${{env.OS}} >> allure-results/environment.properties
 
       - name: Generate report
         uses: simple-elf/allure-report-action@master
