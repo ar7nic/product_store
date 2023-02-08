@@ -80,6 +80,8 @@ jobs:
           name: artifact-results
           path: allure-results
 
+      - run: echo BROWSER=${{env.BROWSER}} > allure-results/environment.properties
+
       - name: Generate report
         uses: simple-elf/allure-report-action@master
         if: always()
